@@ -1,7 +1,7 @@
 import { useState } from "react";
-import ManagerLogin from "./ManagerLogin";
-import PersonLogin from "./PersonLogin";
-import ManagerSignup from "./ManagerSignup";
+import { ManagerLogin } from "./ManagerLogin";
+import { PersonLogin } from "./PersonLogin";
+import { ManagerSignup } from "./ManagerSignup";
 
 const LandingPage = () =>{
     const [currForm, setCurrForm] = useState("None");

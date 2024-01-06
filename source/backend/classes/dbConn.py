@@ -27,6 +27,9 @@ class DBConn:
         )
         self.cursor = self.connection.cursor()
 
+    def commit(self):
+        self.connection.commit()
+
     def __del__(self):
         self.cursor.close()
         self.connection.close()

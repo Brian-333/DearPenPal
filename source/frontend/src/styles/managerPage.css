@@ -1,0 +1,59 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: orange;
+    padding: 10px;
+}
+  
+nav button {
+    background-color: white;
+    border: none;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+nav input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+td, th {
+    border: 0;
+    text-align: left;
+    padding: 8px;
+}
+
+.students {
+    overflow: scroll;
+    height: 60vh;
+    width: 100%;
+}
+
+/* table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.students {
+    overflow: scroll; 
+    height: 100px;
+}
+
+td, th {
+    border: 0;
+    text-align: left;
+    padding: 8px;
+} */
+  
+  
