@@ -20,6 +20,11 @@ const ManagerSignup = ({setCurrForm}) => {
         </div>
         <div class = 'inputtext'>
         <form onSubmit={onSubmit}>
+            <label>I am a:</label><br></br>
+            <select name = 'Choose One...' id= 'choose'>
+                <option value = 'Teacher'>Teacher</option>
+                <option value = 'Manager'>Retirement Community Manager</option>
+            </select><br></br>
             <label>Username:</label><br></br>
             <input type = "text" id = "username" name = "Username" value={username} onChange={(e) => setUsername(e.target.value)}></input><br></br>
             <label>Password:</label><br></br>
