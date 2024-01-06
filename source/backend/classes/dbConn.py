@@ -2,6 +2,13 @@ import psycopg2 # PostgreSQL database adapter for Python
 import json
 
 # Load config file (db_config.json has to be in the backend folder)
+# {
+#     "database": "",
+#     "user": "",
+#     "password": "",
+#     "host": "",
+#     "port": 
+# }
 if __name__ == '__main__':
     with open('../db_config.json') as config_file:
         config = json.load(config_file)
