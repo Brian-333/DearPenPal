@@ -1,7 +1,7 @@
 # DearPenPal
 
 ### General Idea
-The is web app connects a school to a senior home.  
+The is web app connects a school to a retirement community.  
 One of each party will have a manager account (e.x. teacher)  
 Each sub account will be matched with another.
 
