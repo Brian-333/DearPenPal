@@ -1,5 +1,6 @@
 import { SignMeUp } from '../api'
 import { useState } from 'react'
+import '../styles/login.css'
 
 const ManagerSignup = ({setCurrForm}) => {
     const [username, setUsername] = useState("")
@@ -13,12 +14,17 @@ const ManagerSignup = ({setCurrForm}) => {
     }
 
     return(
-    <div>
-        <div>
-            <button type="button" onClick={() => setCurrForm("None")}>Back</button>
+    <div class = 'loginbg'>
+        <div class = 'backbuttonpad'>
+            <button class = 'buttoncolour' type="button" onClick={() => setCurrForm("None")}>Back</button>
         </div>
-        <div>
+        <div class = 'inputtext'>
         <form onSubmit={onSubmit}>
+            <label>I am a:</label><br></br>
+            <select name = 'Choose One...' id= 'choose'>
+                <option value = 'Teacher'>Teacher</option>
+                <option value = 'Manager'>Retirement Community Manager</option>
+            </select><br></br>
             <label>Username:</label><br></br>
             <input type = "text" id = "username" name = "Username" value={username} onChange={(e) => setUsername(e.target.value)}></input><br></br>
             <label>Password:</label><br></br>
@@ -27,7 +33,7 @@ const ManagerSignup = ({setCurrForm}) => {
             <input type = "text" id = "name" name = "name" value={fullName} onChange={(e) => setFullName(e.target.value)}></input><br></br>
             <label>Email:</label><br></br>
             <input type = "text" id = "email" name = "email" value={email} onChange={(e) => setEmail(e.target.value)}></input><br></br>
-            <input type = "submit"></input>
+            <input class = 'signupsubmit' type = "submit"></input>
         </form>
         </div>
     </div>)

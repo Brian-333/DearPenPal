@@ -1,3 +1,4 @@
+import '../styles/login.css'
 const PersonLogin = ({setCurrForm}) => {
     return (
         <div class = 'loginbg'>
