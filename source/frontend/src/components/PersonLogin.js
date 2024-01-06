@@ -17,4 +17,4 @@ const PersonLogin = ({setCurrForm}) => {
     )
 }
 
-export default PersonLogin
+export { PersonLogin }

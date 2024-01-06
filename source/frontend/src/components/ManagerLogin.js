@@ -18,4 +18,4 @@ const ManagerLogin = ({setCurrForm}) => {
     )
 }
 
-export default ManagerLogin
+export { ManagerLogin }

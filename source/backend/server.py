@@ -7,10 +7,10 @@ app = Flask(__name__)
 def manager_create():
     conn = DBConn()
 
-    username = request.form['username']
-    password = request.form['password']
-    email = request.form['email']
-    name = request.form['name']
+    username = request.json['username']
+    password = request.json['password']
+    email = request.json['email']
+    name = request.json['name']
 
     try:
         conn.cursor.execute(
@@ -18,9 +18,9 @@ def manager_create():
             (username, password, email, name)
         )
         conn.commit()
-        return 'Success'
+        return 'Success', 200
     except Exception as e:
-        return str(e)
+        return str(e), 500
     
 @app.route('/manager_login', methods=['POST'])
 def manager_login():
