@@ -7,7 +7,7 @@ import './App.css';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={ <PersonLogin/> }></Route>
+      <Route path="/" element={ <ManagerLogin/> }></Route>
     </Routes>
   );
 }
