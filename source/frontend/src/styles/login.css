@@ -11,7 +11,7 @@
 .inputtext{
     text-align: center;
     justify-content: center;
-    padding-top:10%;
+    padding-top: 10%;
     font-size: 25pt;
 
 }
@@ -19,7 +19,7 @@
 .inputboxsize{
     width: 200pt;
     height: 20pt;
-    font-size: 15 pt;
+    font-size: 20 pt;
 }
 
 .backbuttonpad{
@@ -40,3 +40,8 @@
     padding-top: 5%;
 }
 
+.signupsubmit{
+    background-color: #8fc0a9;
+    font-size: 20pt;
+    margin-top: 5%;
+}
