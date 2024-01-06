@@ -1,3 +1,4 @@
+import '../styles/login.css'
 const ManagerLogin = () => {
     return (
         <div>
