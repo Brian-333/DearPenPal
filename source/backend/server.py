@@ -116,6 +116,26 @@ def sub_acct_login():
     except Exception as e:
         return str(e), 500
 
+@app.route('/get_sub_accts', methods=['POST'])
+def get_sub_accts():
+    conn = DBConn()
+
+    manager = request.json['manager']
+
+    try:
+        conn.cursor.execute(
+            'SELECT * FROM sub_acct WHERE manager = %s',
+            (manager,)
+        )
+        result = conn.cursor.fetchall()
+        if result:
+            return result, 200
+        else:
+            return 'No sub account found', 404
+        
+    except Exception as e:
+        return str(e), 500
+
 # Running app
 if __name__ == '__main__':
     app.run(debug=True)
