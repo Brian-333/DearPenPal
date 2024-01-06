@@ -1,5 +1,5 @@
 import '../styles/login.css'
-const ManagerLogin = () => {
+const ManagerLogin = ({setCurrForm}) => {
     return (
         <div>
             <div>
