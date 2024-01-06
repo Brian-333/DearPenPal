@@ -1,8 +1,38 @@
-body {
+.loginbg {
     background-color:#faf3dd;
+    padding-bottom: 35%;
+    
 }
-/*
-.form-submit-button{
-    color: #faf3dd;
+.buttoncolour{
+    background-color: #68b0abdd;
+    font-size: 20pt;
 }
-*/
+
+.inputtext{
+    text-align: center;
+    padding-top:15%;
+    font-size: 25pt;
+
+}
+
+.inputboxsize{
+    width: 200pt;
+    height: 20pt;
+    font-size: 15 pt;
+}
+
+.backbuttonpad{
+    padding-left: 1%;
+    padding-top: 1%;
+}
+
+.submitbuttonpad{
+    padding-top: 5%;
+    padding-left: 46%;
+}
+
+.title{
+    font-size: 40pt;
+    padding-left: 38%;
+}
+
