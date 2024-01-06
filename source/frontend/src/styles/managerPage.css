@@ -24,6 +24,7 @@ table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    table-layout: fixed;
 }
 
 td, th {
@@ -31,5 +32,28 @@ td, th {
     text-align: left;
     padding: 8px;
 }
+
+.students {
+    overflow: scroll;
+    height: 60vh;
+    width: 100%;
+}
+
+/* table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.students {
+    overflow: scroll; 
+    height: 100px;
+}
+
+td, th {
+    border: 0;
+    text-align: left;
+    padding: 8px;
+} */
   
   

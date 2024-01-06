@@ -5,13 +5,37 @@ const ManagerPage = () => {
     <div>
       <NavBar/>
       <table>
-        <tr>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Password</th>
-        </tr>
-        <StudentRow name="John" username="john123" password="banana"/>
+          <tr>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Password</th>
+          </tr>
       </table>
+      <div class="students">
+        <table>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+          <StudentRow name="John" username="john123" password="banana"/>
+        </table>
+        
+      </div>
     </div>
   );
 }
