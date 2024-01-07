@@ -79,8 +79,10 @@ function FetchLetters({token, setSent, setReceived})
         headers: {
             'Authorization': 'Bearer ' + token
         }
-    }).then((response) => {
-        const jsonResponse = response.json()
+    }).then(async (response) => {
+        const jsonResponse = await response.json()
+        console.log(jsonResponse)
+
 
         if(response.ok) {
             setSent(jsonResponse.sent)

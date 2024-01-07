@@ -214,20 +214,20 @@ def get_letters():
     try:
         print('ASDASDA')
         conn.cursor.execute(
-            'SELECT * FROM letters WHERE owner = %s',
+            'SELECT id, content, s1.name as owner_name, s2.name as receiver_name, sent_at FROM letters, sub_acct s1, sub_acct s2 WHERE owner = %s AND owner = s1.username AND receiver = s2.username',
             (user, )
         )
         sent = conn.cursor.fetchall()
         conn.cursor.execute(
-            'SELECT * FROM letters WHERE receiver = %s',
+            'SELECT id, content, s1.name as owner_name, s2.name as receiver_name, sent_at FROM letters, sub_acct s1, sub_acct s2 WHERE receiver = %s AND owner = s1.username AND receiver = s2.username',
             (user, )
         )
         received = conn.cursor.fetchall()
-        print(sent)
-        print(received)
-
+        sent = list(map(lambda x: {"id": x[0], "text": x[1], "owner_name": x[2], "receiver_name": x[3], "date": x[4]}, sent))
+        received = list(map(lambda x: {"id": x[0], "text": x[1], "owner_name": x[2], "receiver_name": x[3], "date": x[4]}, received))
         return {'sent': sent, 'received': received}, 200
     except Exception as e:
+        print(e)
         return {'msg': str(e)}, 500
 
 @app.route('/send_letter', methods=['POST'])
