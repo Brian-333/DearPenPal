@@ -71,4 +71,29 @@ function LogMeOut({token, removeToken})
     })
 }
 
+function AddSubAcct({username, password, name, setError})
+{
+    fetch("/add_sub_acct", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "username": username,
+            "password": password,
+            "name": name,
+        })
+    }).then(async (response) => {
+        console.log(response)
+        const jsonResponse = await response.json()
+        if(!response.ok){
+            console.log("Unsuccessful Add Sub Acct")
+            setError(jsonResponse.msg)
+        }
+        else {
+            setError(null)
+        }
+    })
+}
+
 export {SignMeUp, LogMeIn, LogMeOut};
