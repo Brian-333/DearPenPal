@@ -95,12 +95,13 @@ function FetchLetters({token, setSent, setReceived})
     })
 }
 
-function AddSubAcct({username, password, name, setError})
+function AddSubAcct({token, username, password, name, setError})
 {
     fetch("/add_sub_acct", {
         method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify({
             "username": username,
@@ -120,4 +121,4 @@ function AddSubAcct({username, password, name, setError})
     })
 }
 
-export {SignMeUp, LogMeIn, LogMeOut, FetchLetters};
+export {SignMeUp, LogMeIn, LogMeOut, FetchLetters, AddSubAcct};

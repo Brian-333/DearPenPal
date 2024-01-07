@@ -1,4 +1,4 @@
-import { LogMeOut } from '../api';
+import { LogMeOut, AddSubAcct } from '../api';
 import '../styles/managerPage.css';
 import React, { useContext, useState } from 'react';
 import { UserContext } from './UserContext';
@@ -6,8 +6,14 @@ import { UserContext } from './UserContext';
 const ManagerPage = () => {
   const [students, setStudents] = useState([]);
   const [displayedStudents, setDisplayedStudents] = useState([]);
+  const [error, setError] = useState(null);
+  const {access_token: [token,, ]} = useContext(UserContext);
 
   const addStudent = (student) => {
+    AddSubAcct({token: token, username: student.username, password: student.password, name: student.name, setError});
+    if (error !== null) {
+      return;
+    }
     const newStudents = [...students, student];
     newStudents.reverse();
     setStudents(newStudents);
@@ -25,7 +31,7 @@ const ManagerPage = () => {
 
   return (
     <div>
-      <NavBar handleSearchChange={handleSearchChange}/>
+      <NavBar handleSearchChange={handleSearchChange} error={error}/>
       <div className='student-table'>
         <table>
             <tr>
@@ -195,7 +201,7 @@ const StudentRow = ({name, username, password, onClick}) => {
   );
 }
 
-const NavBar = ({handleSearchChange}) => {
+const NavBar = ({handleSearchChange, error}) => {
   const {access_token: [token, removeToken, ]} = useContext(UserContext)
   function onLogOut()
   {
@@ -209,6 +215,9 @@ const NavBar = ({handleSearchChange}) => {
         <div className="dropdown">
           <button className="logoutbtn" onClick={onLogOut}>Log Out</button>
         </div>
+      </div>
+      <div className="error">
+        <p>{error}</p>
       </div>
       <div className="search-container">
         <form>
