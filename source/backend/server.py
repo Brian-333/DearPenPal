@@ -301,7 +301,6 @@ def send_letter():
         else:
             max_id = max_id + 1
         
-        receiver = receiver[0]
         conn.cursor.execute(
             'INSERT INTO letters (id, content, owner, receiver, sent_at) VALUES (%s, %s, %s, %s, %s)',
             (max_id, content, owner, receiver, datetime.now())
