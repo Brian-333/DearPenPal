@@ -10,7 +10,6 @@
 .tabletop{
     overflow: scroll;
     width: 40%;
-
 }
 
 .letterviewer{
@@ -43,4 +42,14 @@
     background-color: #faf3dd;
     margin-bottom: 1%;
     font-size: 15pt;
+}
+
+.sendletter{
+    width: 550;
+    border: none;
+    background-color: #faf3dd;
+}
+
+.sendbutton{
+    padding-left: 50%;
 }
