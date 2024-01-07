@@ -116,13 +116,37 @@ def add_sub_acct():
             (manager,)
         )
         usr_type = conn.cursor.fetchone()[0]
-        
+
         # Register new sub account
         conn.cursor.execute(
             'INSERT INTO sub_acct (username, password, name, type, manager) VALUES (%s, %s, %s, %s, %s)',
             (username, hash_password(password), name, usr_type, manager)
         )
         conn.commit()
+
+        # Match sub account
+        match_type = {'senior': 'student', 'student': 'senior'}
+        match_type = match_type[usr_type]
+
+        conn.cursor.execute(
+            'SELECT username FROM sub_acct WHERE type = %s AND matched IS NULL',
+            (match_type,)
+        )
+
+        matched_user = conn.cursor.fetchone()
+        if matched_user:
+            matched_user = matched_user[0]
+            # Match found
+            conn.cursor.execute(
+                'UPDATE sub_acct SET matched = %s WHERE username = %s',
+                (username, matched_user)
+            )
+            conn.cursor.execute(
+                'UPDATE sub_acct SET matched = %s WHERE username = %s',
+                (matched_user, username)
+            )
+            conn.commit()
+            return {'msg': 'Success and Matched'}, 200
 
         return {'msg': 'Success'}, 200
     
