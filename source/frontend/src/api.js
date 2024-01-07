@@ -1,4 +1,4 @@
-async function SignMeUp({username, password, acc_type, email, name})
+async function SignMeUp({username, password, acc_type, email, name, setError})
 {
     return await fetch("/manager_create", {
     method: "POST",
@@ -23,7 +23,7 @@ async function SignMeUp({username, password, acc_type, email, name})
     })
 }
 
-function LogMeIn({username, password, setToken, type})
+function LogMeIn({username, password, setToken, type, setError})
 {
     const url = type === "m" ? "/manager_login" : "/sub_acct_login"
     console.log(url)
@@ -41,9 +41,11 @@ function LogMeIn({username, password, setToken, type})
         const jsonResponse = await response.json()
         if(!response.ok){
             console.log("Unsuccessfull login")
+            setError(jsonResponse.msg)
             // throw new Error(jsonResponse.msg)
         }
         else {
+            setError(null)
             setToken(jsonResponse.access_token)
         }
     })

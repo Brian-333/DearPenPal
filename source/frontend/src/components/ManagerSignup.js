@@ -8,10 +8,11 @@ const ManagerSignup = ({setCurrForm}) => {
     const [email, setEmail] = useState("")
     const [fullName, setFullName] = useState("")
     const [type, setType] = useState("student")
+    const [error, setError] = useState(null)
 
     async function onSubmit()
     {
-        await SignMeUp({username, password, acc_type: type, email, name: fullName});
+        await SignMeUp({username, password, acc_type: type, email, name: fullName, setError});
     }
 
     return(
@@ -35,6 +36,9 @@ const ManagerSignup = ({setCurrForm}) => {
             <label>Email:</label><br></br>
             <input type = "text" id = "email" name = "email" value={email} onChange={(e) => setEmail(e.target.value)}></input><br></br>
             <button type = "submit" onClick={onSubmit}>Submit</button>
+        </div>
+        <div>
+            <p>{error}</p>
         </div>
         </div>
     </div>)
