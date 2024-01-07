@@ -10,7 +10,7 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 jwt = JWTManager(app)
 import hashlib
 SALT = 'home_and_school'
-MNG_TYPES = ['senior', 'student']
+TYPES = ['senior', 'student']
 
 def hash_password(password):
     password = password + SALT
@@ -28,10 +28,10 @@ def manager_create():
     password = hash_password(password)
 
     # Validate inputs
-    if not manager_type in MNG_TYPES:
-        return 'Invalid manager type', 400
+    if not manager_type in TYPES:
+        return {'msg': 'Invalid manager type'}, 400
     if not username or not password:
-        return 'Missing fields', 400
+        return {'msg': 'Missing fields'}, 400
 
     try:
         # Check if username already exists
@@ -41,7 +41,7 @@ def manager_create():
         )
         result = conn.cursor.fetchone()
         if result:
-            return 'Username already exists', 403
+            return {'msg': 'Username already exists'}, 403
         
         # Register new manager
         conn.cursor.execute(
@@ -53,7 +53,7 @@ def manager_create():
     except Exception as e:
         print(e)
         return jsonify({"msg": str(e)}), 500
-    
+
 @app.route('/manager_login', methods=['POST', 'GET'])
 def manager_login():
     conn = DBConn()
@@ -64,7 +64,7 @@ def manager_login():
 
     # Validate inputs
     if not username or not password:
-        return 'Missing fields', 400
+        return {'msg': 'Missing fields'}, 400
 
     try:
         conn.cursor.execute(
@@ -79,7 +79,14 @@ def manager_login():
             return jsonify({"msg": "Invalid username or password"}), 401
     except Exception as e:
         return str(e), 500
-    
+
+@jwt_required()
+@app.route('/logout', methods=['GET'])
+def logout():
+    response = jsonify({'msg': 'Success'})
+    unset_jwt_cookies(response)
+    return response, 200
+
 @app.route('/add_sub_acct', methods=['POST'])
 def add_sub_acct():
     conn = DBConn()
@@ -87,14 +94,10 @@ def add_sub_acct():
     username = request.json['username']
     password = request.json['password']
     name = request.json['name']
-    usr_type = request.json['usr_type']
-    manager = request.json['manager']
-
-    # Validate inputs
-    if usr_type not in MNG_TYPES:
-        return 'Invalid user type', 400
+    manager = get_jwt_identity()
 
     try:
+
         # Check if username already exists
         conn.cursor.execute(
             'SELECT * FROM sub_acct WHERE username = %s',
@@ -102,7 +105,14 @@ def add_sub_acct():
         )
         result = conn.cursor.fetchone()
         if result:
-            return 'Username already exists', 403
+            return {'msg': 'Username already exists'}, 403
+        
+        # Get manager type
+        conn.cursor.execute(
+            'SELECT type FROM managers WHERE username = %s',
+            (manager,)
+        )
+        usr_type = conn.cursor.fetchone()[0]
         
         # Register new sub account
         conn.cursor.execute(
@@ -110,11 +120,11 @@ def add_sub_acct():
             (username, hash_password(password), name, usr_type, manager)
         )
         conn.commit()
-        # password is returned to frontend for user to login
-        return ['Success', password], 200
+
+        return {'msg': 'Success'}, 200
     
     except Exception as e:
-        return str(e), 500
+        return {'msg': str(e)}, 500
     
 @app.route('/sub_acct_login', methods=['POST'])
 def sub_acct_login():
@@ -131,18 +141,49 @@ def sub_acct_login():
         )
         result = conn.cursor.fetchone()
         if result:
-            return 'Success', 200
+            return {'msg': 'Success'}, 200
         else:
-            return 'Failed', 403
+            return {'msg': 'Failed'}, 403
         
+    except Exception as e:
+        return {'msg': str(e)}, 500
+    
+@jwt_required()
+@app.route('/sub_acct_update', methods=['POST'])
+def sub_acct_update():
+    conn = DBConn()
+
+    username = request.json['username']
+    password = request.json['password']
+    name = request.json['name']
+
+    try:
+        # Check if username already exists
+        conn.cursor.execute(
+            'SELECT * FROM sub_acct WHERE username = %s',
+            (username,)
+        )
+        result = conn.cursor.fetchone()
+        if not result:
+            return {'msg': 'Username does not exist'}, 403
+        
+        # Update sub account
+        conn.cursor.execute(
+            'UPDATE sub_acct SET password = %s, name = %s WHERE username = %s',
+            (hash_password(password), name)
+        )
+        conn.commit()
+        return {'msg': 'Success'}, 200
+    
     except Exception as e:
         return str(e), 500
 
+@jwt_required()
 @app.route('/get_sub_accts', methods=['POST'])
 def get_sub_accts():
     conn = DBConn()
 
-    manager = request.json['manager']
+    manager = get_jwt_identity()
 
     try:
         conn.cursor.execute(
@@ -151,12 +192,13 @@ def get_sub_accts():
         )
         result = conn.cursor.fetchall()
         if result:
-            return result, 200
+            # ! Results are in tuple format
+            return {'msg': result}, 200
         else:
-            return 'No sub account found', 404
+            return {'msg': 'No sub account found'}, 404
         
     except Exception as e:
-        return str(e), 500
+        return {'msg': str(e)}, 500
 
 # Running app
 if __name__ == '__main__':

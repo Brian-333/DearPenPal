@@ -1,5 +1,7 @@
+import { LogMeOut } from '../api';
 import '../styles/managerPage.css';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { UserContext } from './UserContext';
 
 const ManagerPage = () => {
   const [students, setStudents] = useState([]);
@@ -194,10 +196,19 @@ const StudentRow = ({name, username, password, onClick}) => {
 }
 
 const NavBar = ({handleSearchChange}) => {
+  const {access_token: [token, removeToken, ]} = useContext(UserContext)
+  function onLogOut()
+  {
+    LogMeOut({token, removeToken})
+  }
+
   return (
     <nav>
       <div className="account-container">
-        <button>Account</button>
+        <button className="accountbtn">Account</button>
+        <div className="dropdown">
+          <button className="logoutbtn" onClick={onLogOut}>Log Out</button>
+        </div>
       </div>
       <div className="search-container">
         <form>

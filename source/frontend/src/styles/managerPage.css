@@ -117,3 +117,28 @@ td, th {
 .MyInput:focus {
     outline: none;
 }
+
+.accountbtn {
+    width: 100px;
+}
+
+.dropdown {
+    display: none;
+    position: absolute;
+    overflow: auto;
+    box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+  }
+  .account-container:hover .dropdown {
+    display: block;
+  }
+  .dropdown button {
+    display: block;
+    color: #000000;
+    width: 100px;
+    margin:0;
+    text-decoration: none;
+  }
+  .dropdown button:hover {
+    color: #FFFFFF;
+    background-color: #00A4BD;
+  }
