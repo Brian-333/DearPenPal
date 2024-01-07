@@ -22,8 +22,7 @@ const ManagerPage = () => {
       }
 
       setError(null)
-      const newStudents = [...students, student];
-      newStudents.reverse();
+      const newStudents = [student, ...students];
       setStudents(newStudents);
       setDisplayedStudents(newStudents);
       return null

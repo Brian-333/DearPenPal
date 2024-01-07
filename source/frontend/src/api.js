@@ -110,8 +110,10 @@ function FetchSubAccts({token, setSubAccts, setDisplayedSubAccts})
 
         if(response.ok) {
             // console.log(jsonResponse.msg)
-            setSubAccts(jsonResponse.msg)
-            setDisplayedSubAccts(jsonResponse.msg)
+            const accts = jsonResponse.msg
+            accts.reverse()
+            setSubAccts(accts)
+            setDisplayedSubAccts(accts)
         }
         else {
             console.log(jsonResponse.msg)
