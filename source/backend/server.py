@@ -207,7 +207,6 @@ def get_sub_accts():
 @app.route('/get_letters', methods=['GET'])
 @jwt_required()
 def get_letters():
-    print("ASDASD")
     conn = DBConn()
     
     user = get_jwt_identity()
@@ -233,7 +232,7 @@ def get_letters():
 @app.route('/send_letter', methods=['POST'])
 @jwt_required()
 def send_letter():
-    conn = DBConn
+    conn = DBConn()
 
 
 
