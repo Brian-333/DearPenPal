@@ -225,8 +225,6 @@ def get_letters():
         received = conn.cursor.fetchall()
         sent = list(map(lambda x: {"id": x[0], "text": x[1], "owner_name": x[2], "receiver_name": x[3], "date": x[4]}, sent))
         received = list(map(lambda x: {"id": x[0], "text": x[1], "owner_name": x[2], "receiver_name": x[3], "date": x[4]}, received))
-        print(sent)
-        print(received)
         return {'sent': sent, 'received': received}, 200
     except Exception as e:
         print(e)
