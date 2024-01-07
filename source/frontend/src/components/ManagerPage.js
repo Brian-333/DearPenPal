@@ -137,12 +137,19 @@ const InputRow = ({onSubmit}) => {
         onKeyDown={handleKeyDown}
         />
       </td>
-      <td></td>
+      <td>
+        <input 
+        className='MyInput'
+        placeholder=''
+        type="none" 
+        disabled="disabled"
+        />
+      </td>
     </tr>
   );
 }
 
-const StudentModal = ({show, onClose, Senior}) => {
+const StudentModal = ({show, onClose}) => {
   if (!show) {
     return null;
   }
@@ -151,7 +158,6 @@ const StudentModal = ({show, onClose, Senior}) => {
     <>
       <div className="modal-backdrop" onClick={onClose}/>
       <div className="modal-content">
-        <p>Pair: {Senior}</p>
         <label>Change Name</label>
         <div className='.form-element'>
           <input placeholder='Type new name...'></input>
