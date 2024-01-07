@@ -137,7 +137,14 @@ const InputRow = ({onSubmit}) => {
         onKeyDown={handleKeyDown}
         />
       </td>
-      <td></td>
+      <td>
+        <input 
+        className='MyInput'
+        placeholder=''
+        type="none" 
+        disabled="disabled"
+        />
+      </td>
     </tr>
   );
 }
