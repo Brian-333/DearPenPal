@@ -28,8 +28,8 @@
 }
 
 .inboxbg{
-    background-color: #c8d5b9;
-    padding-bottom: 50pt
+    background-color: #B9C9A6;
+    padding-bottom: 30pt
 }
 
 .sidebyside{
@@ -46,16 +46,45 @@
 
 .sendletter{
     width: 500pt;
-    height: 600pt;
+    height: 500pt;
     border: none;
     background-color: #faf3dd;
     overflow-wrap: break-word;
     resize: none;
-    padding-top: 2%;
-    
+    margin-top: 2%;
+    margin-left: 8%;
 }
 
 .sendbutton{
-    padding-left: 50%;
+    padding-left: 60%;
     float:left;
+}
+
+.selectperson{
+    margin-left: 2%;
+    margin-top: 20pt;
+    font-size: 20pt;
+    background-color: #faf3dd;
+}
+
+.logoutbutton{
+    margin-left: 59%;
+    font-size: 20pt;
+    background-color: #faf3dd;
+}
+
+.readlettersbutton{
+    margin-left: 2%;
+    font-size: 20pt;
+    background-color: #faf3dd;
+}
+
+table .active-row {
+    background-color: #7a9f4d;
+}
+
+.error{
+    text-align: center;
+    color: red;
+    padding: 0;
 }

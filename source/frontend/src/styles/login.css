@@ -1,10 +1,10 @@
 .loginbg {
-    background-color:#c8d5b9;
+    background-color:#B9C9A6;
     padding-bottom: 19%;
     
 }
 .buttoncolour{
-    background-color: #8fc0a9;
+    background-color: #faf3dd;
     font-size: 20pt;
 }
 
@@ -31,6 +31,7 @@
     justify-content: center;
     text-align: center;
     padding-top: 5%;
+    vertical-align: top;
 }
 
 .title{
@@ -41,7 +42,26 @@
 }
 
 .signupsubmit{
-    background-color: #8fc0a9;
+    background-color: #faf3dd;
     font-size: 20pt;
     margin-top: 5%;
+}
+
+.error{
+    text-align:center;
+    color: red;
+    padding: 0;
+}
+
+.error p{
+    position:absolute;
+    text-align: center;
+    width: 100%;
+}
+
+.mltitle{
+    font-size: 40pt;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 3%;
 }

@@ -1,49 +1,54 @@
+import { useContext, useState } from 'react';
+import { LogMeOut, SendLetter } from '../api';
 import '../styles/Inbox.css'
+import { UserContext } from './UserContext';
+import { Link } from "react-router-dom";
 
 const SendPage = () => {
-    return(
+    const {access_token: [token, removeToken, ]} = useContext(UserContext)
+    const [content, setContent] = useState("")
+    const [message, setMessage] = useState(null)
+    const [error, setError] = useState(null)
+
+    function onLogOut()
+    {
+        LogMeOut({token, removeToken})
+    }
+
+    function onSend()
+    {
+        SendLetter({token, content}).then((msg) => {
+            if(msg === null) {
+                setContent("")
+                setError(null)
+                setMessage("You successfully sent your letter")
+            }
+            else {
+                setError(msg)
+                setMessage(null)
+            }
+        })
+        
+    }
+
+    return (
         <div class = 'inboxbg'>
-            <button class = 'inboxbbutton'>Back</button>
-            <table class = 'tabletop'>
-                <tr>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Open</th>
-                </tr>
-            </table>
+            <button class = 'logoutbutton' onClick={onLogOut}>Logout</button>
+            
+            <Link to='/Inbox'><button class = 'readlettersbutton' type="button">Read Your Letters</button></Link>
             <div class = 'sidebyside'>
-                <div class = "inletter">
-                <table>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                </table>
+                <div>
+                    {message === null ? null : <p>{message}</p>}
+                    {error === null ? null : <p className='error'>{error}</p>}
                 </div>
-                <div class = 'letterviewer'>
-                    <textarea rows = '80' cols ='50' class = 'sendletter'></textarea> 
+                <div>
+                    <textarea rows = '80' cols = '5' class = 'sendletter' value={content} onChange={(e) => setContent(e.target.value)}></textarea>
                 </div>
-                <div class = 'Send Button'>
-                <button class = 'inboxbbutton'>Send</button>
-            </div>
+                <div class = 'sendbutton'>
+                    <button class = 'inboxbbutton' onClick={onSend}>Send</button>
+                </div>
             </div>
         </div>
-    );
-}
-
-const Letter = (props) => {
-    return (
-        <tr>
-            <td>To: {props.name}</td>
-            <td>{props.date}</td>
-            <td><button id = {props.name}>Open</button></td>
-        </tr>
     );
 } 
 

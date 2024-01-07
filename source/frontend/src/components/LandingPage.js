@@ -1,22 +1,26 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ManagerLogin } from "./ManagerLogin";
 import { PersonLogin } from "./PersonLogin";
 import { ManagerSignup } from "./ManagerSignup";
 import { UserContext } from "./UserContext";
-import SendPage from "./SendPage";
-import InboxPage from "./InboxPage"
 import  { Navigate } from 'react-router-dom';
 import '../styles/landing.css'
+import { GetAccType } from "../api";
 
 const LandingPage = () =>{
     const [currForm, setCurrForm] = useState("None");
-    const {access_token: [token,,]} = useContext(UserContext)
+    const {access_token: [token,,],
+            user: [,,usertype, setUsertype]} = useContext(UserContext)
+    
+    useEffect(() => {
+        if(!(token === "" || token == null || token == undefined)){
+            GetAccType({token, setUsertype})
+        }
+    }, [])
 
     const renderForm = () => {
-        console.log("DEBUGGING - CurrForm:" + currForm)
-        console.log(token, (token === null))
-        if(!(token === "" || token === null)){
-            return <Navigate to='/Manager' />
+        if(window.location.href.substring(window.location.href.lastIndexOf('/')) === '/Send' || window.location.href.substring(window.location.href.lastIndexOf('/')) === '/Manager'){
+            window.location.href = '/'
         }
         if(currForm === "None"){
             return (<div class='landingbg'>
@@ -48,7 +52,10 @@ const LandingPage = () =>{
 
     return(
         <>
-            {renderForm()}
+            {(!(token === "" || token == null || token == undefined) && usertype === 'm') ?
+                <Navigate to='/Manager' /> :
+                ((!(token === "" || token == null || token == undefined) && usertype === 'p') ? 
+                <Navigate to='/Send'/> : renderForm())}
         </>
     )
 }

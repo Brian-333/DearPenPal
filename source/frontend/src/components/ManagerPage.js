@@ -1,11 +1,17 @@
-import { LogMeOut } from '../api';
+import { LogMeOut, FetchSubAccts, AddSubAcct } from '../api';
 import '../styles/managerPage.css';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from './UserContext';
 
 const ManagerPage = () => {
   const [students, setStudents] = useState([]);
   const [displayedStudents, setDisplayedStudents] = useState([]);
+  const [error, setError] = useState(null);
+  const {access_token: [token,, ]} = useContext(UserContext);
+
+  useEffect(() => {
+    FetchSubAccts({token, setSubAccts: setStudents, setDisplayedSubAccts: setDisplayedStudents});
+  }, [token])
 
   // Add a new state for controlling the visibility of the modal
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -20,10 +26,19 @@ const ManagerPage = () => {
   }
 
   const addStudent = (student) => {
-    const newStudents = [...students, student];
-    newStudents.reverse();
-    setStudents(newStudents);
-    setDisplayedStudents(newStudents);
+    return AddSubAcct({token: token, username: student.username, password: student.password, name: student.name, setError})
+    .then((err) => {
+      if (err !== null) {
+        setError(err)
+        return err
+      }
+
+      setError(null)
+      const newStudents = [student, ...students];
+      setStudents(newStudents);
+      setDisplayedStudents(newStudents);
+      return null
+    });
   }
 
   const handleSearchChange = (event) => {
@@ -37,7 +52,7 @@ const ManagerPage = () => {
 
   return (
     <div>
-      <NavBar handleSearchChange={handleSearchChange}/>
+      <NavBar handleSearchChange={handleSearchChange} error={error}/>
       <div className='student-table'>
         <table>
             <tr>
@@ -79,10 +94,15 @@ const InputRow = ({onSubmit}) => {
         finalPassword = generatePassword(10);
       }
 
-      onSubmit({ name: nameValue, username: finalUsername, password: finalPassword });
-      setNameValue("");
-      setUsernameValue("");
-      setPasswordValue("");
+      onSubmit({ name: nameValue, username: finalUsername, password: finalPassword })
+      .then((err) => {
+        if(err === null)
+        {
+          setNameValue("");
+          setUsernameValue("");
+          setPasswordValue("");
+        }
+    });
     }
   }
 
@@ -170,7 +190,7 @@ const StudentRow = ({name, username, password, onClick}) => {
   );
 }
 
-const NavBar = ({handleSearchChange}) => {
+const NavBar = ({handleSearchChange, error}) => {
   const {access_token: [token, removeToken, ]} = useContext(UserContext)
   function onLogOut()
   {
@@ -178,16 +198,19 @@ const NavBar = ({handleSearchChange}) => {
   }
 
   return (
-    <nav>
+    <nav className="navbar">
       <div className="account-container">
         <button className="accountbtn">Account</button>
         <div className="dropdown">
           <button className="logoutbtn" onClick={onLogOut}>Log Out</button>
         </div>
       </div>
+      <div className="errormng">
+        <p>{error}</p>
+      </div>
       <div className="search-container">
         <form>
-          <input type="text" placeholder="Search for Student..." onChange={handleSearchChange} />
+          <input class = 'bgcolour' type="text" placeholder="Search for Student..." onChange={handleSearchChange} />
         </form>
       </div>
     </nav>
