@@ -96,15 +96,32 @@ td, th {
 
 .form-element {
     display: block;
-    margin-bottom: 30px;
+    padding: 10px;
 }
 
 .form-element input {
     width: 30ch;
 }
 
+.delete-button {
+    background-color: rgb(255, 109, 109);
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.delete-button:hover {
+    outline: none;
+    cursor: pointer;
+    background: rgb(255, 72, 72)55, 109, 109);
+}
+
 .cursor-pointer {
     cursor: pointer;
+}
+
+.cursor-pointer:hover {
+    border: 0.7px solid black;
 }
 
 .MyInput {

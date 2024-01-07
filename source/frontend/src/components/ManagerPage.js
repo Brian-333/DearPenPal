@@ -175,28 +175,29 @@ const StudentModal = ({show, onClose, onSubmit}) => {
     <>
       <div className="modal-backdrop" onClick={onClose}/>
       <div className="modal-content">
-        <label>Change Name</label>
-        <div className='.form-element'>
-          <input placeholder='Type new name...'></input>
-        </div>
-        <div className='.form-element'>
-          <button>Submit</button>
-        </div>
+        <form>
+          <label>Change Name</label>
+          <div className='form-element'>
+            <input placeholder='Type new name...'></input>
+          </div>
 
-        <label>Change Password</label>
-        <div className='.form-element'>
-          <input placeholder='New password...'></input>
-        </div>
-        <div className='.form-element'>
-          <input placeholder='Confirm new password...'></input>
-        </div>
-        <div className='.form-element'>
-          <button>Submit</button>
-        </div>
+          <label>Change Password</label>
+          <div className='form-element'>
+            <input placeholder='New password...'></input>
+          </div>
+          <div className='form-element'>
+            <input placeholder='Confirm new password...'></input>
+          </div>
+          <div className='form-element'>
+            <button>Submit</button>
+          </div>
+          <div>
 
-        <div className='.form-element'>
-          <button>Delete Account</button>
-        </div>
+          </div>
+          <div className='form-element'>
+            <button className='delete-button'>Delete Account</button>
+          </div>
+        </form>
       </div>
     </>
   );
@@ -224,8 +225,8 @@ function generatePassword(length) {
 
 const StudentRow = ({name, username, password, onClick, matched}) => {
   return (
-    <tr>
-      <td className="cursor-pointer" onClick={onClick}>{name}</td>
+    <tr className="cursor-pointer" onClick={onClick}>
+      <td>{name}</td>
       <td>{username}</td>
       <td>{password}</td>
       <td>{matched}</td>
