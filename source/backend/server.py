@@ -2,19 +2,52 @@ from flask import Flask, jsonify, request
 from classes.dbConn import DBConn
 from datetime import timedelta
 from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, unset_jwt_cookies, jwt_required, JWTManager
+import hashlib
+from datetime import datetime
 
 app = Flask(__name__)
 
 app.config["JWT_SECRET_KEY"] = "some-key"
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 jwt = JWTManager(app)
-import hashlib
 SALT = 'home_and_school'
 TYPES = ['senior', 'student']
 
 def hash_password(password):
     password = password + SALT
     return hashlib.sha256(password.encode('utf-8')).hexdigest()
+
+def match_sub_accts(username, user_type):
+    conn = DBConn()
+
+    try:
+        match_type = {'senior': 'student', 'student': 'senior'}
+        match_type = match_type[user_type]
+
+        conn.cursor.execute(
+            'SELECT username FROM sub_acct WHERE type = %s AND matched IS NULL',
+            (match_type,)
+        )
+
+        matched_user = conn.cursor.fetchone()
+        if matched_user:
+            matched_user = matched_user[0]
+            # Match found
+            conn.cursor.execute(
+                'UPDATE sub_acct SET matched = %s WHERE username = %s',
+                (username, matched_user)
+            )
+            conn.cursor.execute(
+                'UPDATE sub_acct SET matched = %s WHERE username = %s',
+                (matched_user, username)
+            )
+            conn.commit()
+            return True
+        
+        return False
+
+    except Exception as e:
+        raise e
 
 print(hash_password("1"))
 
@@ -125,27 +158,7 @@ def add_sub_acct():
         conn.commit()
 
         # Match sub account
-        match_type = {'senior': 'student', 'student': 'senior'}
-        match_type = match_type[usr_type]
-
-        conn.cursor.execute(
-            'SELECT username FROM sub_acct WHERE type = %s AND matched IS NULL',
-            (match_type,)
-        )
-
-        matched_user = conn.cursor.fetchone()
-        if matched_user:
-            matched_user = matched_user[0]
-            # Match found
-            conn.cursor.execute(
-                'UPDATE sub_acct SET matched = %s WHERE username = %s',
-                (username, matched_user)
-            )
-            conn.cursor.execute(
-                'UPDATE sub_acct SET matched = %s WHERE username = %s',
-                (matched_user, username)
-            )
-            conn.commit()
+        if match_sub_accts(username, usr_type):
             return {'msg': 'Success and Matched'}, 200
 
         return {'msg': 'Success'}, 200
@@ -259,6 +272,37 @@ def get_letters():
 @jwt_required()
 def send_letter():
     conn = DBConn()
+
+    owner = get_jwt_identity()
+    content = request.json['content']
+
+    try:
+        conn.cursor.execute(
+            'SELECT matched FROM sub_acct WHERE username = %s',
+            (owner,)
+        )
+        receiver = conn.cursor.fetchone()
+        if not receiver:
+            return {'msg': 'You do not have a match yet.'}, 403
+        
+        conn.cursor.execute(
+            'SELECT MAX(id) FROM letters'
+        )
+        max_id = conn.cursor.fetchone()
+        if not max_id:
+            max_id = 0
+        else:
+            max_id = max_id[0] + 1
+        
+        receiver = receiver[0]
+        conn.cursor.execute(
+            'INSERT INTO letters (id, content, owner, receiver, sent_at) VALUES (%s, %s, %s, %s, %s)',
+            (max_id, content, owner, receiver, datetime.now())
+        )
+        conn.commit()
+        return {'msg': 'Success'}, 200
+    except Exception as e:
+        return {'msg': str(e)}, 500
 
 
 
