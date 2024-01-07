@@ -1,4 +1,4 @@
-async function SignMeUp({username, password, acc_type, email, name, setToken, setError})
+async function SignMeUp({username, password, acc_type, email, name, setToken, setUsertype, setError})
 {
     return await fetch("/manager_create", {
     method: "POST",
@@ -21,7 +21,7 @@ async function SignMeUp({username, password, acc_type, email, name, setToken, se
             setError(jsonResponse.msg)
         }
         else {
-            LogMeIn({username, password, setToken, type: "m", setError})
+            LogMeIn({username, password, setToken, type: "m", setUsertype, setError})
         }
     })
 }

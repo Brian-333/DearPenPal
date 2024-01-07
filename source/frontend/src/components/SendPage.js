@@ -16,6 +16,7 @@ const SendPage = () => {
     function onSend()
     {
         SendLetter({token, content})
+        setContent("")
     }
 
     return (
