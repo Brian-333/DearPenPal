@@ -2,7 +2,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #68b0ab; /*#4CAF50;*/
+    background-color: #B9C9A6; /*#4CAF50;*/
     padding: 10px;
 }
   
@@ -140,7 +140,7 @@ td, th {
   }
   .dropdown button:hover {
     color: #FFFFFF;
-    background-color: #00A4BD;
+    background-color: #B9C9A6;
   }
 
   .bgcolour{

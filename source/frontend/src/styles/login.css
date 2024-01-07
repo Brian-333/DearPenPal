@@ -1,5 +1,5 @@
 .loginbg {
-    background-color:#68b0ab;
+    background-color:#B9C9A6;
     padding-bottom: 19%;
     
 }
@@ -57,4 +57,11 @@
     position:absolute;
     text-align: center;
     width: 100%;
+}
+
+.mltitle{
+    font-size: 40pt;
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 3%;
 }
