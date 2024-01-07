@@ -10,13 +10,14 @@ import '../styles/landing.css'
 
 const LandingPage = () =>{
     const [currForm, setCurrForm] = useState("None");
-    const {access_token: [token,,]} = useContext(UserContext)
+    const {access_token: [token,,],
+            user: [,,usertype,]} = useContext(UserContext)
 
     const renderForm = () => {
         console.log("DEBUGGING - CurrForm:" + currForm)
         console.log(token, (token === null))
-        if(!(token === "" || token === null)){
-            return <Navigate to='/Manager' />
+        if(!(token === "" || token == null || token == undefined)){
+            return usertype == 'm' ? <Navigate to='/Manager' /> : <Navigate to='/Send' />
         }
         if(currForm === "None"){
             return (<div class='landingbg'>

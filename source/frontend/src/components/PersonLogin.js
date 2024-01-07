@@ -7,11 +7,12 @@ const PersonLogin = ({setCurrForm}) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState(null)
-    const {access_token:[,,setToken]} = useContext(UserContext)
+    const {access_token:[,,setToken],
+        user: [,,,setUsertype]} = useContext(UserContext)
 
     function onSubmit()
     {
-        LogMeIn({username, password, setToken, type:"p", setError})
+        LogMeIn({username, password, setToken, type:"p", setUsertype, setError})
     }
 
     return (

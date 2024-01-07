@@ -16,6 +16,8 @@ def hash_password(password):
     password = password + SALT
     return hashlib.sha256(password.encode('utf-8')).hexdigest()
 
+print(hash_password("1"))
+
 @app.route('/manager_create', methods=['POST'])
 def manager_create():
     conn = DBConn()
@@ -142,9 +144,10 @@ def sub_acct_login():
         )
         result = conn.cursor.fetchone()
         if result:
-            return {'msg': 'Success'}, 200
+            token = create_access_token(identity=username)
+            return jsonify({"access_token": token})
         else:
-            return {'msg': 'Failed'}, 403
+            return jsonify({"msg": "Invalid username or password"}), 401
         
     except Exception as e:
         return {'msg': str(e)}, 500
@@ -179,8 +182,8 @@ def sub_acct_update():
     except Exception as e:
         return str(e), 500
 
-@jwt_required()
 @app.route('/get_sub_accts', methods=['POST'])
+@jwt_required()
 def get_sub_accts():
     conn = DBConn()
 
@@ -200,6 +203,39 @@ def get_sub_accts():
         
     except Exception as e:
         return {'msg': str(e)}, 500
+
+@app.route('/get_letters', methods=['GET'])
+@jwt_required()
+def get_letters():
+    print("ASDASD")
+    conn = DBConn()
+    
+    user = get_jwt_identity()
+    try:
+        print('ASDASDA')
+        conn.cursor.execute(
+            'SELECT * FROM letters WHERE owner = %s',
+            (user, )
+        )
+        sent = conn.cursor.fetchall()
+        conn.cursor.execute(
+            'SELECT * FROM letters WHERE receiver = %s',
+            (user, )
+        )
+        received = conn.cursor.fetchall()
+        print(sent)
+        print(received)
+
+        return {'sent': sent, 'received': received}, 200
+    except Exception as e:
+        return {'msg': str(e)}, 500
+
+@app.route('/send_letter', methods=['POST'])
+@jwt_required()
+def send_letter():
+    conn = DBConn
+
+
 
 # Running app
 if __name__ == '__main__':
