@@ -18,7 +18,7 @@ const ManagerSignup = ({setCurrForm}) => {
             <button type="button" onClick={() => setCurrForm("None")}>Back</button>
         </div>
         <div>
-        <form onSubmit={onSubmit}>
+        <div>
             <label>Username:</label><br></br>
             <input type = "text" id = "username" name = "Username" value={username} onChange={(e) => setUsername(e.target.value)}></input><br></br>
             <label>Password:</label><br></br>
@@ -27,8 +27,8 @@ const ManagerSignup = ({setCurrForm}) => {
             <input type = "text" id = "name" name = "name" value={fullName} onChange={(e) => setFullName(e.target.value)}></input><br></br>
             <label>Email:</label><br></br>
             <input type = "text" id = "email" name = "email" value={email} onChange={(e) => setEmail(e.target.value)}></input><br></br>
-            <input type = "submit"></input>
-        </form>
+            <button type = "submit" onClick={onSubmit}>Submit</button>
+        </div>
         </div>
     </div>)
 }
