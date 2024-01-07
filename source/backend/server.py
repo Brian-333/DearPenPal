@@ -108,7 +108,7 @@ def manager_login():
         )
         result = conn.cursor.fetchone()
         if result:
-            token = create_access_token(identity=username)
+            token = create_access_token(identity=(username, "m"))
             return jsonify({"access_token": token})
         else:
             return jsonify({"msg": "Invalid username or password"}), 401
@@ -122,6 +122,13 @@ def logout():
     unset_jwt_cookies(response)
     return response, 200
 
+@app.route('/get_acc_type', methods=['GET'])
+@jwt_required()
+def get_acc_type():
+    (username, type_) = get_jwt_identity()
+    print(type_)
+    return jsonify({'type': type_}), 200
+
 @app.route('/add_sub_acct', methods=['POST'])
 @jwt_required()
 def add_sub_acct():
@@ -130,7 +137,7 @@ def add_sub_acct():
     username = request.json['username']
     password = request.json['password']
     name = request.json['name']
-    manager = get_jwt_identity()
+    (manager, type_) = get_jwt_identity()
 
     try:
 
@@ -181,7 +188,7 @@ def sub_acct_login():
         )
         result = conn.cursor.fetchone()
         if result:
-            token = create_access_token(identity=username)
+            token = create_access_token(identity=(username, "p"))
             return jsonify({"access_token": token})
         else:
             return jsonify({"msg": "Invalid username or password"}), 401
@@ -224,7 +231,7 @@ def sub_acct_update():
 def get_sub_accts():
     conn = DBConn()
 
-    manager = get_jwt_identity()
+    (manager, type_) = get_jwt_identity()
 
     try:
         conn.cursor.execute(
@@ -248,7 +255,7 @@ def get_sub_accts():
 def get_letters():
     conn = DBConn()
     
-    user = get_jwt_identity()
+    (user, type_) = get_jwt_identity()
     try:
         print('ASDASDA')
         conn.cursor.execute(

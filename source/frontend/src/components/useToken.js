@@ -12,7 +12,6 @@ function useToken() {
   const [token, setToken] = useState(getToken());
 
   function saveToken(userToken) {
-    console.log(userToken)
     localStorage.setItem('token', userToken);
     setToken(userToken);
   };

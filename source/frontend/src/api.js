@@ -48,7 +48,6 @@ function LogMeIn({username, password, setToken, type, setUsertype, setError})
             // throw new Error(jsonResponse.msg)
         }
         else {
-            console.log(type)
             setUsertype(type)
             setError(null)
             setToken(jsonResponse.access_token)
@@ -69,6 +68,24 @@ function LogMeOut({token, removeToken})
         }
         else{
             console.log("Error in logout")
+        }
+    })
+}
+
+function GetAccType({token, setUsertype})
+{
+    fetch('get_acc_type', {
+        method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    }).then(async (response) => {
+        const jsonResponse = await response.json()
+        if(response.ok){
+            setUsertype(jsonResponse.type)
+        }
+        else{
+            console.log("Error checking type")
         }
     })
 }
@@ -121,7 +138,7 @@ function FetchSubAccts({token, setSubAccts, setDisplayedSubAccts})
     })
 }
 
-function AddSubAcct({token, username, password, name, setError})
+function AddSubAcct({token, username, password, name})
 {
     return fetch("/add_sub_acct", {
         method: "POST",
@@ -148,4 +165,23 @@ function AddSubAcct({token, username, password, name, setError})
     })
 }
 
-export {SignMeUp, LogMeIn, LogMeOut, FetchLetters, FetchSubAccts, AddSubAcct};
+function SendLetter({token, content})
+{
+    fetch('/send_letter', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            'content': content
+        })
+    }).then(async (response) => {
+        const jsonResponse = await response.json()
+        if(!response.ok) {
+            console.log(jsonResponse.msg)
+        }
+    })
+}
+
+export {SignMeUp, LogMeIn, LogMeOut, GetAccType, FetchLetters, FetchSubAccts, AddSubAcct, SendLetter};
