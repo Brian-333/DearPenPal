@@ -212,7 +212,7 @@ const NavBar = ({handleSearchChange}) => {
       </div>
       <div className="search-container">
         <form>
-          <input type="text" placeholder="Search for Student..." onChange={handleSearchChange} />
+          <input class = 'bgcolour' type="text" placeholder="Search for Student..." onChange={handleSearchChange} />
         </form>
       </div>
     </nav>

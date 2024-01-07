@@ -6,9 +6,12 @@ import { UserContext } from "./UserContext";
 import SendPage from "./SendPage";
 import InboxPage from "./InboxPage"
 import  { Navigate } from 'react-router-dom';
+import managerPage from "./ManagerPage"
 import '../styles/landing.css'
+import ManagerPage from "./ManagerPage";
 
 const LandingPage = () =>{
+    return (<ManagerPage></ManagerPage>);
     const [currForm, setCurrForm] = useState("None");
     const {access_token: [token,,],
             user: [,,usertype,]} = useContext(UserContext)

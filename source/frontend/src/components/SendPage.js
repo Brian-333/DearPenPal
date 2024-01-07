@@ -30,4 +30,3 @@ const SendPage = () => {
 } 
 
 export default SendPage
-
