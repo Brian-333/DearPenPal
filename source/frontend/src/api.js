@@ -95,6 +95,28 @@ function FetchLetters({token, setSent, setReceived})
     })
 }
 
+function FetchSubAccts({token, setSubAccts})
+{
+    fetch("/get_sub_accts", {
+        method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    }).then(async (response) => {
+        const jsonResponse = await response.json()
+        console.log(jsonResponse)
+
+
+        if(response.ok) {
+            // console.log(jsonResponse.msg)
+            setSubAccts(jsonResponse.msg)
+        }
+        else {
+            console.log(jsonResponse.msg)
+        }
+    })
+}
+
 function AddSubAcct({token, username, password, name, setError})
 {
     return fetch("/add_sub_acct", {
@@ -122,4 +144,4 @@ function AddSubAcct({token, username, password, name, setError})
     })
 }
 
-export {SignMeUp, LogMeIn, LogMeOut, FetchLetters, AddSubAcct};
+export {SignMeUp, LogMeIn, LogMeOut, FetchLetters, FetchSubAccts, AddSubAcct};
