@@ -13,10 +13,8 @@ const ManagerPage = () => {
     FetchSubAccts({token, setSubAccts: setStudents, setDisplayedSubAccts: setDisplayedStudents});
   }, [token])
 
-  // Add a new state for controlling the visibility of the modal
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  // Add a new function to handle the click event
   const handleNameClick = () => {
     setIsModalVisible(true);
   }
@@ -59,12 +57,13 @@ const ManagerPage = () => {
               <th>Name</th>
               <th>Username</th>
               <th>Password</th>
+              <th>Matched</th>
             </tr>
             <InputRow onSubmit={addStudent}/>
         </table>
         <div class="students">
           <table>
-            {displayedStudents.map((student) => <StudentRow {...student} onClick={handleNameClick} />)}
+            {displayedStudents.map((student) => <StudentRow {...student} onClick={handleNameClick} matched='Refresh page'/>)}
           </table>
         </div>
       </div>
@@ -111,7 +110,7 @@ const InputRow = ({onSubmit}) => {
       <td>
         <input 
           className='MyInput'
-          placeholder='Type student name...'
+          placeholder='Type account name...'
           type="text" 
           value={nameValue} 
           onChange={e => setNameValue(e.target.value)} 
@@ -138,11 +137,12 @@ const InputRow = ({onSubmit}) => {
         onKeyDown={handleKeyDown}
         />
       </td>
+      <td></td>
     </tr>
   );
 }
 
-const StudentModal = ({ show, onClose }) => {
+const StudentModal = ({show, onClose, Senior}) => {
   if (!show) {
     return null;
   }
@@ -151,10 +151,32 @@ const StudentModal = ({ show, onClose }) => {
     <>
       <div className="modal-backdrop" onClick={onClose}/>
       <div className="modal-content">
-        <p></p>
-        
-        <p>Change Password</p>
-        
+        <p>Pair: {Senior}</p>
+        <label>Change Name</label>
+        <div className='.form-element'>
+          <input placeholder='Type new name...'></input>
+        </div>
+        <div className='.form-element'>
+          <button>Submit</button>
+        </div>
+
+        <label>Change Password</label>
+        <div className='.form-element'>
+          <input placeholder='Old password...'></input>
+        </div>
+        <div className='.form-element'>
+          <input placeholder='New password...'></input>
+        </div>
+        <div className='.form-element'>
+          <input placeholder='Confirm new password...'></input>
+        </div>
+        <div className='.form-element'>
+          <button>Submit</button>
+        </div>
+
+        <div className='.form-element'>
+          <button>Delete Account</button>
+        </div>
       </div>
     </>
   );
@@ -180,12 +202,13 @@ function generatePassword(length) {
   return password;
 }
 
-const StudentRow = ({name, username, password, onClick}) => {
+const StudentRow = ({name, username, password, onClick, matched}) => {
   return (
     <tr>
       <td className="cursor-pointer" onClick={onClick}>{name}</td>
       <td>{username}</td>
       <td>{password}</td>
+      <td>{matched}</td>
     </tr>
   );
 }
@@ -210,7 +233,7 @@ const NavBar = ({handleSearchChange, error}) => {
       </div>
       <div className="search-container">
         <form>
-          <input class = 'bgcolour' type="text" placeholder="Search for Student..." onChange={handleSearchChange} />
+          <input class = 'bgcolour' type="text" placeholder="Search for account..." onChange={handleSearchChange} />
         </form>
       </div>
     </nav>
