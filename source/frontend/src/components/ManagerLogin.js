@@ -22,9 +22,9 @@ const ManagerLogin = ({setCurrForm}) => {
                 <label>Manager Login</label><br></br>
             </div>
             <div>
-                <label for = "username">Username:</label><br></br>
+                <label>Username:</label><br></br>
                 <input class ='inputboxsize' type = "text" id = "username" name = "username" value={username} onChange={(e) => setUsername(e.target.value)}></input><br></br>
-                <label for = "password">Password:</label><br></br>
+                <label>Password:</label><br></br>
                 <input class ='inputboxsize' type = "text" id = "password" name = "password" value={password} onChange={(e) => setPassword(e.target.value)}></input><br></br>
             </div>
             <div class = 'submitbuttonpad'>

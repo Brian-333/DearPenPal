@@ -53,7 +53,7 @@ def manager_create():
     except Exception as e:
         print(e)
         return jsonify({"msg": str(e)}), 500
-    
+
 @app.route('/manager_login', methods=['POST', 'GET'])
 def manager_login():
     conn = DBConn()
@@ -81,6 +81,12 @@ def manager_login():
         return str(e), 500
 
 @jwt_required()
+@app.route('/logout', methods=['GET'])
+def logout():
+    response = jsonify({'msg': 'Success'})
+    unset_jwt_cookies(response)
+    return response, 200
+
 @app.route('/add_sub_acct', methods=['POST'])
 def add_sub_acct():
     conn = DBConn()
