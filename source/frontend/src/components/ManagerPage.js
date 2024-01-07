@@ -7,6 +7,18 @@ const ManagerPage = () => {
   const [students, setStudents] = useState([]);
   const [displayedStudents, setDisplayedStudents] = useState([]);
 
+  // Add a new state for controlling the visibility of the modal
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  // Add a new function to handle the click event
+  const handleNameClick = () => {
+    setIsModalVisible(true);
+  }
+
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
+  }
+
   const addStudent = (student) => {
     const newStudents = [...students, student];
     newStudents.reverse();
@@ -37,11 +49,11 @@ const ManagerPage = () => {
         </table>
         <div class="students">
           <table>
-            {displayedStudents.map((student) => <StudentRow {...student} />)}
+            {displayedStudents.map((student) => <StudentRow {...student} onClick={handleNameClick} />)}
           </table>
         </div>
       </div>
-      {/* <AddStudentModal isOpen={isOpen} close={closeModal} onSubmit={addStudent} /> */}
+      <StudentModal show={isModalVisible} onClose={handleCloseModal}/>
     </div>
   );
 }
@@ -110,60 +122,23 @@ const InputRow = ({onSubmit}) => {
   );
 }
 
-// const AddStudentModal = ({isOpen, close, onSubmit}) => {
-//   const [name, setName] = useState("");
-//   const [username, setUsername] = useState("");
-//   const [password, setPassword] = useState("");
+const StudentModal = ({ show, onClose }) => {
+  if (!show) {
+    return null;
+  }
 
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     let finalUsername = username;
-//     let finalPassword = password;
-  
-//     if (name.trim() === "") {
-//       alert("Name field cannot be empty")
-//       return;
-//     }
-//     if (username.trim() === "") {
-//       finalUsername = generateRandomUsername();
-//     }
-//     if (password.trim() === "") {
-//       finalPassword = generatePassword(10);
-//     }
-  
-//     onSubmit({name: name, username: finalUsername, password: finalPassword});
-//     setName("");
-//     setUsername("");
-//     setPassword("");
-//   }
-
-//   if (!isOpen) {
-//     return null;
-//   }
-
-//   return (
-//     <>
-//       <div className="modal-backdrop" onClick={close}/>
-//       <div className="modal-content">
-//         <form onSubmit={handleSubmit}>
-//           <div class="form-element">
-//             <label onClick>Name: </label>
-//             <input type="text" name="name" placeholder={'Mandatory'} onChange={e => setName(e.target.value)} />
-//           </div>
-//           <div class="form-element">
-//             <label>Username: </label>
-//             <input type="text" name="username" placeholder={'Leave blank for a random username'} onChange={e => setUsername(e.target.value)} />
-//           </div>
-//           <div class="form-element">
-//             <label>Password: </label>
-//             <input type="text" name="password" placeholder={'Leave blank for a random password'} onChange={e => setPassword(e.target.value)} />
-//           </div>
-//           <input type="submit" value="Submit"/>
-//         </form>
-//       </div>
-//     </>
-//   );
-// }
+  return (
+    <>
+      <div className="modal-backdrop" onClick={onClose}/>
+      <div className="modal-content">
+        <p></p>
+        
+        <p>Change Password</p>
+        
+      </div>
+    </>
+  );
+}
 
 function generateRandomUsername() {
   const adjectives = ['Quick', 'Lazy', 'Happy', 'Sad', 'Sleepy', 'Noisy', 'Hungry'];
