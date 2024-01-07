@@ -22,7 +22,7 @@ const ManagerLogin = ({setCurrForm}) => {
             <div class= 'title'>
                 <label>Manager Login</label><br></br>
             </div>
-            <div>
+            <div class = 'inputtext'>
                 <label>Username:</label><br></br>
                 <input class ='inputboxsize' type = "text" id = "username" name = "username" value={username} onChange={(e) => setUsername(e.target.value)}></input><br></br>
                 <label>Password:</label><br></br>

@@ -35,7 +35,7 @@ const ManagerSignup = ({setCurrForm}) => {
             <input type = "text" id = "name" name = "name" value={fullName} onChange={(e) => setFullName(e.target.value)}></input><br></br>
             <label>Email:</label><br></br>
             <input type = "text" id = "email" name = "email" value={email} onChange={(e) => setEmail(e.target.value)}></input><br></br>
-            <button type = "submit" onClick={onSubmit}>Submit</button>
+            <button class = 'signupsubmit' type = "submit" onClick={onSubmit}>Submit</button>
         </div>
         <div>
             <p>{error}</p>

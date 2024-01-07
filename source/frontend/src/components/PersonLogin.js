@@ -37,7 +37,7 @@ const PersonLogin = ({setCurrForm}) => {
             </div>
             }
             <div class = 'submitbuttonpad'>
-                <button class = 'buttoncolour' type = "submit" onClick={onSubmit}></button>
+                <button class = 'buttoncolour' type = "submit" onClick={onSubmit}>Submit</button>
             </div>
             </div>
         </div>
