@@ -10,11 +10,12 @@ const ManagerSignup = ({setCurrForm}) => {
     const [fullName, setFullName] = useState("")
     const [type, setType] = useState("student")
     const [error, setError] = useState(null)
-    const {access_token: [,,setToken]} = useContext(UserContext)
+    const {access_token: [,,setToken],
+        user: [,,,setUsertype]} = useContext(UserContext)
 
     async function onSubmit()
     {
-        await SignMeUp({username, password, acc_type: type, email, name: fullName, setToken, setError});
+        await SignMeUp({username, password, acc_type: type, email, name: fullName, setToken, setUsertype, setError});
     }
 
     return(

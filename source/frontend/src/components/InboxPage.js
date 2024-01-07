@@ -1,6 +1,20 @@
+import { useContext, useEffect, useState } from 'react';
 import '../styles/Inbox.css'
+import { FetchLetters } from '../api';
+import { UserContext } from './UserContext';
 
 const InboxPage = () => {
+    const [sent, setSent] = useState([])
+    const [received, setReceived] = useState([])
+    const [receivedDisplayed, setReceivedDisplayed] = useState(true)
+    const {access_token: [token,,]} = useContext(UserContext)
+
+    useEffect(() => {
+        FetchLetters({token, setSent, setReceived})
+        console.log(sent)
+        console.log(received)
+    }, [])
+
     return(
         <div class = 'inboxbg'>
             <button class = 'inboxbbutton'>Back</button>

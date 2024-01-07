@@ -26,7 +26,7 @@ async function SignMeUp({username, password, acc_type, email, name, setToken, se
     })
 }
 
-function LogMeIn({username, password, setToken, type, setError})
+function LogMeIn({username, password, setToken, type, setUsertype, setError})
 {
     const url = type === "m" ? "/manager_login" : "/sub_acct_login"
     console.log(url)
@@ -48,6 +48,7 @@ function LogMeIn({username, password, setToken, type, setError})
             // throw new Error(jsonResponse.msg)
         }
         else {
+            setUsertype(type)
             setError(null)
             setToken(jsonResponse.access_token)
         }
@@ -71,4 +72,49 @@ function LogMeOut({token, removeToken})
     })
 }
 
-export {SignMeUp, LogMeIn, LogMeOut};
+function FetchLetters({token, setSent, setReceived})
+{
+    fetch("/get_letters", {
+        method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    }).then((response) => {
+        const jsonResponse = response.json()
+
+        if(response.ok) {
+            setSent(jsonResponse.sent)
+            setReceived(jsonResponse.received)
+        }
+        else {
+            console.log(jsonResponse.msg)
+        }
+    })
+}
+
+function AddSubAcct({username, password, name, setError})
+{
+    fetch("/add_sub_acct", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "username": username,
+            "password": password,
+            "name": name,
+        })
+    }).then(async (response) => {
+        console.log(response)
+        const jsonResponse = await response.json()
+        if(!response.ok){
+            console.log("Unsuccessful Add Sub Acct")
+            setError(jsonResponse.msg)
+        }
+        else {
+            setError(null)
+        }
+    })
+}
+
+export {SignMeUp, LogMeIn, LogMeOut, FetchLetters};
