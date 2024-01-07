@@ -1,12 +1,28 @@
 # DearPenPal
-
-### General Idea
-The is web app connects a school to a retirement community.  
-One of each party will have a manager account (e.x. teacher)  
-Each sub account will be matched with another.
-
-### Manager accounts
-Each manager account can create sub accounts (i.e. for each student and each senior)
-
-### Sub accounts
-Each sub account can write letter and receive letters from the matching sub account
+This project was created for HackED 2024
+## Running Instructions (checked only on Windows)
+### Backend
+* In `backend`, run `python -m venv ven`
+* After that, run `venv\Scripts\activate`
+* In the new terminal, run the following commands:
+    * `pip install flask`
+    * `pip install flask_jwt_extended`
+    * `pip install psycopg2`
+    * `deactivate`
+* For this step, you will also need an instance of PostgresSQL running. You need to create a file `db_config.json` in folder `backend` according to the format:
+```
+{
+    "database": "",
+    "user": "",
+    "password": "",
+    "host": "",
+    "port": 
+}
+```
+And you need to fill it out accordingly (port is an int)
+* Start your database instance, run `python dbInit.py`
+* To run the backend, run `venv\Scripts\flask run` in `backend`
+### Frontend
+* Install Node.js and yarn
+* In folder `frontend`, run `npm install`
+* To start the frontend, run `yarn start`
