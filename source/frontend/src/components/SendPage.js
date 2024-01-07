@@ -38,14 +38,14 @@ const SendPage = () => {
             <Link to='/Inbox'><button class = 'readlettersbutton' type="button">Read Your Letters</button></Link>
             <div class = 'sidebyside'>
                 <div>
+                    {message === null ? null : <p>{message}</p>}
+                    {error === null ? null : <p className='error'>{error}</p>}
+                </div>
+                <div>
                     <textarea rows = '80' cols = '5' class = 'sendletter' value={content} onChange={(e) => setContent(e.target.value)}></textarea>
                 </div>
                 <div class = 'sendbutton'>
                     <button class = 'inboxbbutton' onClick={onSend}>Send</button>
-                </div>
-                <div>
-                    {message === null ? null : <p>{message}</p>}
-                    {error === null ? null : <p>{error}</p>}
                 </div>
             </div>
         </div>

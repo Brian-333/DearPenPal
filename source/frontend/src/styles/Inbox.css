@@ -82,3 +82,9 @@
 table .active-row {
     background-color: #7a9f4d;
 }
+
+.error{
+    text-align: center;
+    color: red;
+    padding: 0;
+}
