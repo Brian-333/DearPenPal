@@ -182,7 +182,7 @@ def sub_acct_update():
     except Exception as e:
         return str(e), 500
 
-@app.route('/get_sub_accts', methods=['POST'])
+@app.route('/get_sub_accts', methods=['GET'])
 @jwt_required()
 def get_sub_accts():
     conn = DBConn()
@@ -191,10 +191,11 @@ def get_sub_accts():
 
     try:
         conn.cursor.execute(
-            'SELECT * FROM sub_acct WHERE manager = %s',
+            'SELECT username, name FROM sub_acct WHERE manager = %s',
             (manager,)
         )
         result = conn.cursor.fetchall()
+        result = list(map(lambda x: {'username': x[0], 'name': x[1], 'password': 'hidden'}))
         if result:
             # ! Results are in tuple format
             return {'msg': result}, 200
