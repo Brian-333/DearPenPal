@@ -25,6 +25,9 @@ const ManagerSignup = ({setCurrForm}) => {
         </div>
         <div class = 'inputtext'>
             <div>
+                <div class= 'mltitle'>
+                    <label>Manager Signup </label><br></br>
+                </div>
                 <label>I am a:</label><br></br>
                 <select name = 'Choose One...' id= 'choose' value={type} onChange={(e) => setType(e.target.value)}>
                     <option value = 'student'>Teacher</option>

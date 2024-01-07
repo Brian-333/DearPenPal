@@ -8,7 +8,7 @@
     text-align: center;
     padding-top: 10%;
     padding-bottom: 8%;
-    background-color: #68b0ab;
+    background-color: #B9C9A6;/*#68b0ab;*/
 }
 
 .landingtitle{
@@ -18,7 +18,7 @@
 }
 
 .loginbutton{
-    background-color: #68b0abdd;
+    background-color: #B9C9A6;/*#68b0abdd;*/
     font-size: 45pt;
     padding-top: 1%;
     padding-bottom: 1%;
@@ -39,13 +39,13 @@
 }
 
 .managerbtnleft{
-    background-color: #a8c3c0;
+    background-color:#B9C9A6;/*#a8c3c0;*/
     font-size: 25pt;
     margin-right: 2%
 }
 
 .managerbtnright{
-    background-color: #a8c3c0;
+    background-color: #B9C9A6; /*#a8c3c0;*/
     font-size: 25pt;
     margin-left: 2%
 }

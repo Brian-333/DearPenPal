@@ -11,7 +11,6 @@ import '../styles/landing.css'
 import ManagerPage from "./ManagerPage";
 
 const LandingPage = () =>{
-    return (<ManagerPage></ManagerPage>);
     const [currForm, setCurrForm] = useState("None");
     const {access_token: [token,,],
             user: [,,usertype,]} = useContext(UserContext)
