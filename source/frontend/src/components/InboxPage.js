@@ -15,9 +15,23 @@ const InboxPage = () => {
         console.log(received)
     }, [])
 
+    function onDisplayChange() {
+        setReceivedDisplayed(!receivedDisplayed)
+    }
+
     return(
         <div class = 'inboxbg'>
-            <button class = 'inboxbbutton'>Back</button>
+            <button class = 'inboxbbutton'>Back</button> <br/>
+            {receivedDisplayed ? 
+            <div>
+                <button disabled="disabled">Received</button> 
+                <button onClick={onDisplayChange}>Sent</button> 
+            </div> :
+            <div>
+                <button onClick={onDisplayChange}>Received</button> 
+                <button disabled="disabled">Sent</button> 
+            </div>
+            }      
             <table class = 'tabletop'>
                 <tr>
                     <th>Name</th>
@@ -28,8 +42,9 @@ const InboxPage = () => {
             <div class = 'sidebyside'>
                 <div class = "inletter">
                 <table>
-                    <ReceivedLetter name = "John" date = '2024-01-06'></ReceivedLetter>
-                    <SentLetter name = 'Rolanda' date = '2024-01-05'></SentLetter>
+                    {receivedDisplayed ?
+                    received.map((letter, i) => <ReceivedLetter name={letter.name} date={letter.sent.at}></ReceivedLetter>) :
+                    sent.map((letter, i) => <SentLetter name={letter.name} date={letter.sent.at}></SentLetter>)}
                 </table>
                 </div>
                 <div class = 'letterviewer'>
