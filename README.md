@@ -2,9 +2,9 @@
 This project was created for HackED 2024
 ## Running Instructions (checked only on Windows)
 ### Backend
-* In `backend`, run `python -m venv ven`
+* In `backend`, run `python -m venv venv`
 * After that, run `venv\Scripts\activate`
-* In the new terminal, run the following commands:
+* In the new terminal, run the following commands in the same order:
     * `pip install flask`
     * `pip install flask_jwt_extended`
     * `pip install psycopg2`
