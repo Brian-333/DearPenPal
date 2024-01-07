@@ -21,7 +21,7 @@ async function SignMeUp({username, password, acc_type, email, name, setToken, se
             setError(jsonResponse.msg)
         }
         else {
-            LogMeIn({username, password, setToken, type: acc_type, setError})
+            LogMeIn({username, password, setToken, type: "m", setError})
         }
     })
 }
