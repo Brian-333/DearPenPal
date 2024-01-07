@@ -240,7 +240,7 @@ def get_sub_accts():
             (manager,)
         )
         result = conn.cursor.fetchall()
-        result = list(map(lambda x: {'username': x[0], 'name': x[1], 'password': '(hidden)', 'matched': (x[2] is not None)}, result))
+        result = list(map(lambda x: {'username': x[0], 'name': x[1], 'password': '(hidden)', 'matched': 'matched' if (x[2] is not None) else 'not matched'}, result))
         if result:
             # ! Results are in tuple format
             return {'msg': result}, 200

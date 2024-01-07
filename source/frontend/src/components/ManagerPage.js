@@ -63,7 +63,7 @@ const ManagerPage = () => {
         </table>
         <div class="students">
           <table>
-            {displayedStudents.map((student) => <StudentRow {...student} onClick={handleNameClick} matched='Refresh page'/>)}
+            {displayedStudents.map((student) => <StudentRow {...student} onClick={handleNameClick}/>)}
           </table>
         </div>
       </div>
@@ -93,7 +93,7 @@ const InputRow = ({onSubmit}) => {
         finalPassword = generatePassword(10);
       }
 
-      onSubmit({ name: nameValue, username: finalUsername, password: finalPassword })
+      onSubmit({ name: nameValue, username: finalUsername, password: finalPassword, matched: "Refresh page" })
       .then((err) => {
         if(err === null)
         {
