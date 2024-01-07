@@ -1,8 +1,8 @@
 :root {
-    --blue: #7BB2D9;
-    --white: #c9c9c9;
+    --blue: #68b0ab;
+    --hover-blue: #509490;
+    --white: #eaeaea;
 }
-
 .loginbg {
     background-color: var(--white);
     padding-bottom: 19%;

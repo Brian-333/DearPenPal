@@ -1,6 +1,6 @@
 :root {
-    --blue: #7BB2D9;
-    --hover-blue: #56a3da;
+    --blue: #68b0ab;
+    --hover-blue: #509490;
     --white: #eaeaea;
 }
 
@@ -48,6 +48,14 @@
     background-color: var(--white);
     margin-bottom: 1%;
     font-size: 15pt;
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.inboxbbutton:hover {
+    cursor: pointer;
+    background-color: rgb(190, 190, 190);
 }
 
 .sendletter{
@@ -77,12 +85,30 @@
     margin-left: 59%;
     font-size: 20pt;
     background-color: var(--white);
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.logoutbutton:hover {
+    cursor: pointer;
+    background-color: rgb(190, 190, 190);
 }
 
 .readlettersbutton{
     margin-left: 2%;
     font-size: 20pt;
     background-color: var(--white);
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.readlettersbutton:hover {
+    cursor: pointer;
+    background-color: rgb(190, 190, 190);
 }
 
 table .active-row {
