@@ -10,7 +10,7 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 jwt = JWTManager(app)
 import hashlib
 SALT = 'home_and_school'
-MNG_TYPES = ['senior', 'student']
+TYPES = ['senior', 'student']
 
 def hash_password(password):
     password = password + SALT
@@ -28,7 +28,7 @@ def manager_create():
     password = hash_password(password)
 
     # Validate inputs
-    if not manager_type in MNG_TYPES:
+    if not manager_type in TYPES:
         return 'Invalid manager type', 400
     if not username or not password:
         return 'Missing fields', 400
@@ -98,7 +98,7 @@ def add_sub_acct():
     manager = request.json['manager']
 
     # Validate inputs
-    if usr_type not in MNG_TYPES:
+    if usr_type not in TYPES:
         return 'Invalid user type', 400
 
     try:
@@ -144,7 +144,38 @@ def sub_acct_login():
         
     except Exception as e:
         return str(e), 500
+    
+@jwt_required()
+@app.route('/sub_acct_update', methods=['POST'])
+def sub_acct_update():
+    conn = DBConn()
 
+    username = request.json['username']
+    password = request.json['password']
+    name = request.json['name']
+
+    try:
+        # Check if username already exists
+        conn.cursor.execute(
+            'SELECT * FROM sub_acct WHERE username = %s',
+            (username,)
+        )
+        result = conn.cursor.fetchone()
+        if not result:
+            return 'Username does not exist', 403
+        
+        # Update sub account
+        conn.cursor.execute(
+            'UPDATE sub_acct SET password = %s, name = %s WHERE username = %s',
+            (hash_password(password), name)
+        )
+        conn.commit()
+        return 'Success', 200
+    
+    except Exception as e:
+        return str(e), 500
+
+@jwt_required()
 @app.route('/get_sub_accts', methods=['POST'])
 def get_sub_accts():
     conn = DBConn()
