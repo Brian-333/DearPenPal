@@ -3,6 +3,12 @@ import React, { useState } from 'react';
 
 const ManagerPage = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [students, setStudents] = useState([]);
+
+  const addStudent = (student) => {
+    setStudents([...students, student]);
+    closeModal();
+  }
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
@@ -20,41 +26,55 @@ const ManagerPage = () => {
         </table>
         <div class="students">
           <table>
-            <StudentRow name="John" username="john123" password="banana"/>
-            <StudentRow name="John" username="john123" password="banana"/>
-            <StudentRow name="John" username="john123" password="banana"/>
+            {students.map(student => <StudentRow {...student} />)}
           </table>
         </div>
       </div>
       <AddStudentButton onClick={openModal}/>
-      <StudentModal isOpen={isOpen} close={closeModal} />
+      <AddStudentModal isOpen={isOpen} close={closeModal} onSubmit={addStudent} />
     </div>
   );
 }
 
-const StudentModal = ({isOpen, close}) => {
+const AddStudentModal = ({isOpen, close, onSubmit}) => {
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (name.trim() === "" || username.trim() === "" || password.trim() === "") {
+      return;
+    }
+
+    onSubmit({name, username, password});
+    setName("");
+    setUsername("");
+    setPassword("");
+  }
+
   if (!isOpen) {
     return null;
   }
 
   return (
     <>
-      <div className="modal-backdrop" />
+      <div className="modal-backdrop" onClick={close}/>
       <div className="modal-content">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div class="form-element">
             <label>Name: </label>
-            <input type="text" name="name" placeholder={'Mandatory'}/>
+            <input type="text" name="name" placeholder={'Mandatory'} onChange={e => setName(e.target.value)} />
           </div>
           <div class="form-element">
             <label>Username: </label>
-            <input type="text" name="name" placeholder={'Leave blank for a random username'}/>
+            <input type="text" name="username" placeholder={'Leave blank for a random username'} onChange={e => setUsername(e.target.value)} />
           </div>
           <div class="form-element">
             <label>Password: </label>
-            <input type="text" name="name" placeholder={'Leave blank for a random password'}/>
+            <input type="text" name="password" placeholder={'Leave blank for a random password'} onChange={e => setPassword(e.target.value)} />
           </div>
-          <input type="submit" value="Submit" onClick={close}/>
+          <input type="submit" value="Submit"/>
         </form>
       </div>
     </>
