@@ -2,20 +2,28 @@ import '../styles/managerPage.css';
 import React, { useState } from 'react';
 
 const ManagerPage = () => {
-  const [isOpen, setIsOpen] = useState(false);
   const [students, setStudents] = useState([]);
+  const [displayedStudents, setDisplayedStudents] = useState([]);
 
   const addStudent = (student) => {
-    setStudents([...students, student]);
-    closeModal();
+    const newStudents = [...students, student];
+    newStudents.reverse();
+    setStudents(newStudents);
+    setDisplayedStudents(newStudents);
   }
 
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => setIsOpen(false);
+  const handleSearchChange = (event) => {
+    if (event.target.value === "") {
+      setDisplayedStudents(students);
+    } else {
+      const filteredStudents = students.filter((student) => student.name.toLowerCase().includes(event.target.value.toLowerCase()));
+      setDisplayedStudents(filteredStudents);
+    }
+  }
 
   return (
     <div>
-      <NavBar/>
+      <NavBar handleSearchChange={handleSearchChange}/>
       <div className='student-table'>
         <table>
             <tr>
@@ -23,73 +31,137 @@ const ManagerPage = () => {
               <th>Username</th>
               <th>Password</th>
             </tr>
+            <InputRow onSubmit={addStudent}/>
         </table>
         <div class="students">
           <table>
-            {students.map(student => <StudentRow {...student} />)}
+            {displayedStudents.map((student) => <StudentRow {...student} />)}
           </table>
         </div>
       </div>
-      <AddStudentButton onClick={openModal}/>
-      <AddStudentModal isOpen={isOpen} close={closeModal} onSubmit={addStudent} />
+      {/* <AddStudentModal isOpen={isOpen} close={closeModal} onSubmit={addStudent} /> */}
     </div>
   );
 }
 
-const AddStudentModal = ({isOpen, close, onSubmit}) => {
-  const [name, setName] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+const InputRow = ({onSubmit}) => {
+  const [nameValue, setNameValue] = useState("");
+  const [usernameValue, setUsernameValue] = useState("");
+  const [passwordValue, setPasswordValue] = useState("");
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    let finalUsername = username;
-    let finalPassword = password;
-  
-    if (name.trim() === "") {
-      alert("Name field cannot be empty")
-      return;
-    }
-    if (username.trim() === "") {
-      finalUsername = generateRandomUsername();
-    }
-    if (password.trim() === "") {
-      finalPassword = generatePassword(10);
-    }
-  
-    onSubmit({name: name, username: finalUsername, password: finalPassword});
-    setName("");
-    setUsername("");
-    setPassword("");
-  }
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && nameValue.trim() !== "") {
+      let finalUsername = usernameValue;
+      let finalPassword = passwordValue;
+    
+      if (nameValue.trim() === "") {
+        alert("Name field cannot be empty")
+        return;
+      }
+      if (usernameValue.trim() === "") {
+        finalUsername = generateRandomUsername();
+      }
+      if (passwordValue.trim() === "") {
+        finalPassword = generatePassword(10);
+      }
 
-  if (!isOpen) {
-    return null;
+      onSubmit({ name: nameValue, username: finalUsername, password: finalPassword });
+      setNameValue("");
+      setUsernameValue("");
+      setPasswordValue("");
+    }
   }
 
   return (
-    <>
-      <div className="modal-backdrop" onClick={close}/>
-      <div className="modal-content">
-        <form onSubmit={handleSubmit}>
-          <div class="form-element">
-            <label onClick>Name: </label>
-            <input type="text" name="name" placeholder={'Mandatory'} onChange={e => setName(e.target.value)} />
-          </div>
-          <div class="form-element">
-            <label>Username: </label>
-            <input type="text" name="username" placeholder={'Leave blank for a random username'} onChange={e => setUsername(e.target.value)} />
-          </div>
-          <div class="form-element">
-            <label>Password: </label>
-            <input type="text" name="password" placeholder={'Leave blank for a random password'} onChange={e => setPassword(e.target.value)} />
-          </div>
-          <input type="submit" value="Submit"/>
-        </form>
-      </div>
-    </>
+    <tr>
+      <td>
+        <input 
+          className='MyInput'
+          placeholder='Type student name...'
+          type="text" 
+          value={nameValue} 
+          onChange={e => setNameValue(e.target.value)} 
+          onKeyDown={handleKeyDown}
+        />
+      </td>
+      <td>
+        <input 
+          className='MyInput'
+          placeholder='Leave blank for random username'
+          type="text" 
+          value={usernameValue} 
+          onChange={e => setUsernameValue(e.target.value)} 
+          onKeyDown={handleKeyDown}
+        />
+      </td>
+      <td>
+        <input 
+        className='MyInput'
+        placeholder='Leave blank for random password'
+        type="text" 
+        value={passwordValue} 
+        onChange={e => setPasswordValue(e.target.value)} 
+        onKeyDown={handleKeyDown}
+        />
+      </td>
+    </tr>
   );
 }
+
+// const AddStudentModal = ({isOpen, close, onSubmit}) => {
+//   const [name, setName] = useState("");
+//   const [username, setUsername] = useState("");
+//   const [password, setPassword] = useState("");
+
+//   const handleSubmit = (event) => {
+//     event.preventDefault();
+//     let finalUsername = username;
+//     let finalPassword = password;
+  
+//     if (name.trim() === "") {
+//       alert("Name field cannot be empty")
+//       return;
+//     }
+//     if (username.trim() === "") {
+//       finalUsername = generateRandomUsername();
+//     }
+//     if (password.trim() === "") {
+//       finalPassword = generatePassword(10);
+//     }
+  
+//     onSubmit({name: name, username: finalUsername, password: finalPassword});
+//     setName("");
+//     setUsername("");
+//     setPassword("");
+//   }
+
+//   if (!isOpen) {
+//     return null;
+//   }
+
+//   return (
+//     <>
+//       <div className="modal-backdrop" onClick={close}/>
+//       <div className="modal-content">
+//         <form onSubmit={handleSubmit}>
+//           <div class="form-element">
+//             <label onClick>Name: </label>
+//             <input type="text" name="name" placeholder={'Mandatory'} onChange={e => setName(e.target.value)} />
+//           </div>
+//           <div class="form-element">
+//             <label>Username: </label>
+//             <input type="text" name="username" placeholder={'Leave blank for a random username'} onChange={e => setUsername(e.target.value)} />
+//           </div>
+//           <div class="form-element">
+//             <label>Password: </label>
+//             <input type="text" name="password" placeholder={'Leave blank for a random password'} onChange={e => setPassword(e.target.value)} />
+//           </div>
+//           <input type="submit" value="Submit"/>
+//         </form>
+//       </div>
+//     </>
+//   );
+// }
 
 function generateRandomUsername() {
   const adjectives = ['Quick', 'Lazy', 'Happy', 'Sad', 'Sleepy', 'Noisy', 'Hungry'];
@@ -111,25 +183,17 @@ function generatePassword(length) {
   return password;
 }
 
-const AddStudentButton = (props) => {
-  return (
-    <div className='addStudentContainer'>
-      <button onClick={props.onClick}>Add New Student</button>
-    </div>
-  );
-}
-
-const StudentRow = (props) => {
+const StudentRow = ({name, username, password, onClick}) => {
   return (
     <tr>
-      <td>{props.name}</td>
-      <td>{props.username}</td>
-      <td>{props.password}</td>
+      <td className="cursor-pointer" onClick={onClick}>{name}</td>
+      <td>{username}</td>
+      <td>{password}</td>
     </tr>
   );
 }
 
-const NavBar = () => {
+const NavBar = ({handleSearchChange}) => {
   return (
     <nav>
       <div className="account-container">
@@ -137,8 +201,7 @@ const NavBar = () => {
       </div>
       <div className="search-container">
         <form>
-          <input type="text" placeholder="Search for Student..." />
-          <button type="submit">Search</button>
+          <input type="text" placeholder="Search for Student..." onChange={handleSearchChange} />
         </form>
       </div>
     </nav>

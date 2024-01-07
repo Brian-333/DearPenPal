@@ -35,7 +35,7 @@ td, th {
 
 .students {
     overflow: scroll;
-    height: 60vh;
+    height: 80vh;
     width: 100%;
 }
 
@@ -100,4 +100,20 @@ td, th {
 
 .form-element input {
     width: 30ch;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.MyInput {
+    background-color: rgb(214, 214, 214);
+    border: none;
+    font-size: 1em;
+    padding: none;
+    width: 30ch;
+}
+
+.MyInput:focus {
+    outline: none;
 }
