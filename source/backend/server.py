@@ -1,10 +1,16 @@
-from flask import Flask, request
+from flask import Flask, jsonify, request
 from classes.dbConn import DBConn
-import hashlib
-SALT = 'home_and_school'
-MNG_TYPES = {'Retirement Community Manager': 'senior', 'Teacher': 'student'}
+from datetime import timedelta
+from flask_jwt_extended import create_access_token, get_jwt, get_jwt_identity, unset_jwt_cookies, jwt_required, JWTManager
 
 app = Flask(__name__)
+
+app.config["JWT_SECRET_KEY"] = "some-key"
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
+jwt = JWTManager(app)
+import hashlib
+SALT = 'home_and_school'
+MNG_TYPES = ['senior', 'student']
 
 def hash_password(password):
     password = password + SALT
@@ -22,12 +28,10 @@ def manager_create():
     password = hash_password(password)
 
     # Validate inputs
-    if not manager_type in MNG_TYPES.keys():
+    if not manager_type in MNG_TYPES:
         return 'Invalid manager type', 400
     if not username or not password:
         return 'Missing fields', 400
-    
-    manager_type = MNG_TYPES[manager_type]
 
     try:
         # Check if username already exists
@@ -45,12 +49,12 @@ def manager_create():
             (username, password, manager_type, email, name)
         )
         conn.commit()
-        return 'Success', 200
-    
+        return jsonify({'msg': 'Success'}), 200
     except Exception as e:
-        return str(e), 500
+        print(e)
+        return jsonify({"msg": str(e)}), 500
     
-@app.route('/manager_login', methods=['POST'])
+@app.route('/manager_login', methods=['POST', 'GET'])
 def manager_login():
     conn = DBConn()
 
@@ -69,10 +73,10 @@ def manager_login():
         )
         result = conn.cursor.fetchone()
         if result:
-            return 'Success', 200
+            token = create_access_token(identity=username)
+            return jsonify({"access_token": token})
         else:
-            return 'Failed', 403
-        
+            return jsonify({"msg": "Invalid username or password"}), 401
     except Exception as e:
         return str(e), 500
     
