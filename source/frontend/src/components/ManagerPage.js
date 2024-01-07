@@ -10,14 +10,20 @@ const ManagerPage = () => {
   const {access_token: [token,, ]} = useContext(UserContext);
 
   const addStudent = (student) => {
-    AddSubAcct({token: token, username: student.username, password: student.password, name: student.name, setError});
-    if (error !== null) {
-      return;
-    }
-    const newStudents = [...students, student];
-    newStudents.reverse();
-    setStudents(newStudents);
-    setDisplayedStudents(newStudents);
+    return AddSubAcct({token: token, username: student.username, password: student.password, name: student.name, setError})
+    .then((err) => {
+      if (err !== null) {
+        setError(err)
+        return err
+      }
+
+      setError(null)
+      const newStudents = [...students, student];
+      newStudents.reverse();
+      setStudents(newStudents);
+      setDisplayedStudents(newStudents);
+      return null
+    });
   }
 
   const handleSearchChange = (event) => {
@@ -73,10 +79,15 @@ const InputRow = ({onSubmit}) => {
         finalPassword = generatePassword(10);
       }
 
-      onSubmit({ name: nameValue, username: finalUsername, password: finalPassword });
-      setNameValue("");
-      setUsernameValue("");
-      setPasswordValue("");
+      onSubmit({ name: nameValue, username: finalUsername, password: finalPassword })
+      .then((err) => {
+        if(err === null)
+        {
+          setNameValue("");
+          setUsernameValue("");
+          setPasswordValue("");
+        }
+    });
     }
   }
 
@@ -209,14 +220,14 @@ const NavBar = ({handleSearchChange, error}) => {
   }
 
   return (
-    <nav>
+    <nav className="navbar">
       <div className="account-container">
         <button className="accountbtn">Account</button>
         <div className="dropdown">
           <button className="logoutbtn" onClick={onLogOut}>Log Out</button>
         </div>
       </div>
-      <div className="error">
+      <div className="errormng">
         <p>{error}</p>
       </div>
       <div className="search-container">

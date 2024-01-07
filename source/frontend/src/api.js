@@ -97,7 +97,7 @@ function FetchLetters({token, setSent, setReceived})
 
 function AddSubAcct({token, username, password, name, setError})
 {
-    fetch("/add_sub_acct", {
+    return fetch("/add_sub_acct", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -113,10 +113,11 @@ function AddSubAcct({token, username, password, name, setError})
         const jsonResponse = await response.json()
         if(!response.ok){
             console.log("Unsuccessful Add Sub Acct")
-            setError(jsonResponse.msg)
+            // setError(jsonResponse.msg)
+            return jsonResponse.msg
         }
         else {
-            setError(null)
+            return null
         }
     })
 }

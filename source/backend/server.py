@@ -82,15 +82,15 @@ def manager_login():
     except Exception as e:
         return str(e), 500
 
-@jwt_required()
 @app.route('/logout', methods=['GET'])
+@jwt_required()
 def logout():
     response = jsonify({'msg': 'Success'})
     unset_jwt_cookies(response)
     return response, 200
 
-@jwt_required()
 @app.route('/add_sub_acct', methods=['POST'])
+@jwt_required()
 def add_sub_acct():
     conn = DBConn()
 

@@ -40,7 +40,8 @@ td, th {
 }
 
 .student-table {
-    background-color: #faf3dd/*rgb(214, 214, 214);*/
+    background-color: #faf3dd;/*rgb(214, 214, 214);*/
+    padding-top: 50px;
 }
   
 .addStudentContainer {
@@ -146,4 +147,22 @@ td, th {
   .bgcolour{
     background-color: #faf3dd;
     padding-bottom: 20%;
+  }
+
+  .errormng{
+    text-align: center;
+    color: red;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 0;
+  }
+
+  .errormng p{
+    position:inherit;
+  }
+
+  .navbar{
+    position:fixed;
+    width:100%;
+    height:30px;
   }
