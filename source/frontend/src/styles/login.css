@@ -31,6 +31,7 @@
     justify-content: center;
     text-align: center;
     padding-top: 5%;
+    vertical-align: top;
 }
 
 .title{
@@ -44,4 +45,16 @@
     background-color: #8fc0a9;
     font-size: 20pt;
     margin-top: 5%;
+}
+
+.error{
+    text-align:center;
+    color: red;
+    padding: 0;
+}
+
+.error p{
+    position:absolute;
+    text-align: center;
+    width: 100%;
 }
