@@ -195,7 +195,7 @@ def get_sub_accts():
             (manager,)
         )
         result = conn.cursor.fetchall()
-        result = list(map(lambda x: {'username': x[0], 'name': x[1], 'password': '(hidden)'}))
+        result = list(map(lambda x: {'username': x[0], 'name': x[1], 'password': '(hidden)'}, result))
         if result:
             # ! Results are in tuple format
             return {'msg': result}, 200
@@ -203,6 +203,7 @@ def get_sub_accts():
             return {'msg': 'No sub account found'}, 404
         
     except Exception as e:
+        print(e)
         return {'msg': str(e)}, 500
 
 @app.route('/get_letters', methods=['GET'])

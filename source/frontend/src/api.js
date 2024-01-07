@@ -95,8 +95,9 @@ function FetchLetters({token, setSent, setReceived})
     })
 }
 
-function FetchSubAccts({token, setSubAccts})
+function FetchSubAccts({token, setSubAccts, setDisplayedSubAccts})
 {
+    console.log(token)
     fetch("/get_sub_accts", {
         method: "GET",
         headers: {
@@ -110,6 +111,7 @@ function FetchSubAccts({token, setSubAccts})
         if(response.ok) {
             // console.log(jsonResponse.msg)
             setSubAccts(jsonResponse.msg)
+            setDisplayedSubAccts(jsonResponse.msg)
         }
         else {
             console.log(jsonResponse.msg)

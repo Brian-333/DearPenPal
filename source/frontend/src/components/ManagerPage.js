@@ -1,6 +1,6 @@
 import { LogMeOut, FetchSubAccts, AddSubAcct } from '../api';
 import '../styles/managerPage.css';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from './UserContext';
 
 const ManagerPage = () => {
@@ -8,7 +8,10 @@ const ManagerPage = () => {
   const [displayedStudents, setDisplayedStudents] = useState([]);
   const [error, setError] = useState(null);
   const {access_token: [token,, ]} = useContext(UserContext);
-  FetchSubAccts(token, setStudents);
+
+  useEffect(() => {
+    FetchSubAccts({token, setSubAccts: setStudents, setDisplayedSubAccts: setDisplayedStudents});
+  }, [])
 
   const addStudent = (student) => {
     return AddSubAcct({token: token, username: student.username, password: student.password, name: student.name, setError})
