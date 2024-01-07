@@ -280,7 +280,7 @@ def get_letters():
 def send_letter():
     conn = DBConn()
 
-    owner = get_jwt_identity()
+    (owner, type_) = get_jwt_identity()
     content = request.json['content']
 
     try:
