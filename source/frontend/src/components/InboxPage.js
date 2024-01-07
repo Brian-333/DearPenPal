@@ -14,7 +14,7 @@ const InboxPage = () => {
 
     useEffect(() => {
         FetchLetters({token, setSent, setReceived})
-    }, [])
+    }, [token])
 
     useEffect(() => {
         if(selectedLetter == null) {
@@ -64,8 +64,8 @@ const InboxPage = () => {
                 <div class = "inletter">
                 <table>
                     {receivedDisplayed ?
-                    received?.map((letter, i) => <ReceivedLetter key={i} id={letter.id} name={letter.owner_name} date={letter.date} setSelectedLetter={setSelectedLetter}></ReceivedLetter>) :
-                    sent?.map((letter, i) => <SentLetter key={i} id={letter.id} name={letter.receiver_name} date={letter.date} setSelectedLetter={setSelectedLetter}></SentLetter>)}
+                    received?.map((letter, i) => <ReceivedLetter className={selectedLetter === letter.id ? 'active-row' : ''} key={i} id={letter.id} name={letter.owner_name} date={letter.date} setSelectedLetter={setSelectedLetter}></ReceivedLetter>) :
+                    sent?.map((letter, i) => <SentLetter className={selectedLetter === letter.id ? 'active-row' : ''} key={i} id={letter.id} name={letter.receiver_name} date={letter.date} setSelectedLetter={setSelectedLetter}></SentLetter>)}
                 </table>
                 </div>
                 <div class = 'letterviewer'>
@@ -76,19 +76,19 @@ const InboxPage = () => {
     );
 }
 
-const ReceivedLetter = ({id, name, date, setSelectedLetter}) => {
+const ReceivedLetter = ({className, id, name, date, setSelectedLetter}) => {
     return (
-        <tr>
-            <td>from: {name}</td>
+        <tr className={className}>
+            <td>From: {name}</td>
             <td>{date}</td>
             <td><button id = {id} onClick={() => setSelectedLetter(id)}>Open</button></td>
         </tr>
     );
 }
 
-const SentLetter = ({id, name, date, setSelectedLetter}) => {
+const SentLetter = ({className, id, name, date, setSelectedLetter}) => {
     return (
-        <tr>
+        <tr className={className}>
             <td>To: {name}</td>
             <td>{date}</td>
             <td><button id = {id} onClick={() => setSelectedLetter(id)}>Open</button></td>

@@ -78,3 +78,7 @@
     font-size: 20pt;
     background-color: #faf3dd;
 }
+
+table .active-row {
+    background-color: #7a9f4d;
+}
