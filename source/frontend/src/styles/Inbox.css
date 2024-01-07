@@ -1,3 +1,9 @@
+:root {
+    --blue: #7BB2D9;
+    --hover-blue: #56a3da;
+    --white: #eaeaea;
+}
+
 .inletter{
     overflow: scroll;
     width: 40%;
@@ -14,7 +20,7 @@
 
 .letterviewer{
     justify-content: center;
-    background-color: #faf3dd;
+    background-color: var(--white);
     float: left;
     width: 500pt;
     height: 550pt;
@@ -28,7 +34,7 @@
 }
 
 .inboxbg{
-    background-color: #B9C9A6;
+    background-color: var(--blue);
     padding-bottom: 30pt
 }
 
@@ -39,7 +45,7 @@
 .inboxbbutton{
     margin-left: 1%;
     margin-top:1%;
-    background-color: #faf3dd;
+    background-color: var(--white);
     margin-bottom: 1%;
     font-size: 15pt;
 }
@@ -48,7 +54,7 @@
     width: 500pt;
     height: 500pt;
     border: none;
-    background-color: #faf3dd;
+    background-color: var(--white);
     overflow-wrap: break-word;
     resize: none;
     margin-top: 2%;
@@ -64,23 +70,23 @@
     margin-left: 2%;
     margin-top: 20pt;
     font-size: 20pt;
-    background-color: #faf3dd;
+    background-color: var(--white);
 }
 
 .logoutbutton{
     margin-left: 59%;
     font-size: 20pt;
-    background-color: #faf3dd;
+    background-color: var(--white);
 }
 
 .readlettersbutton{
     margin-left: 2%;
     font-size: 20pt;
-    background-color: #faf3dd;
+    background-color: var(--white);
 }
 
 table .active-row {
-    background-color: #7a9f4d;
+    background-color: var(--hover-blue);
 }
 
 .error{

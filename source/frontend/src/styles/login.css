@@ -1,6 +1,6 @@
 :root {
     --blue: #7BB2D9;
-    --white: #eaeaea;
+    --white: #c9c9c9;
 }
 
 .loginbg {
@@ -9,8 +9,16 @@
     
 }
 .buttoncolour{
-    background-color: #faf3dd;
+    background-color: var(--white);
     font-size: 20pt;
+    border: 0.5px solid black;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.buttoncolour:hover {
+    cursor: pointer;
+    background-color: #bdbdbd;
 }
 
 .inputtext{
@@ -47,9 +55,17 @@
 }
 
 .signupsubmit{
-    background-color: #faf3dd;
+    background-color: var(--white);
     font-size: 20pt;
+    border: 0.5px solid black;
+    border-radius: 20px;
+    padding: 15px;
     margin-top: 5%;
+}
+
+.signupsubmit:hover {
+    cursor: pointer;
+    background-color: #bdbdbd;
 }
 
 .error{
