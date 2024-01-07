@@ -7,7 +7,7 @@ const ManagerSignup = ({setCurrForm}) => {
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
     const [fullName, setFullName] = useState("")
-    const [type, setType] = useState("Teacher")
+    const [type, setType] = useState("student")
 
     async function onSubmit()
     {
