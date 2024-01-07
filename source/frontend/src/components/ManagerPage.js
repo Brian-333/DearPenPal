@@ -93,7 +93,7 @@ const InputRow = ({onSubmit}) => {
         finalPassword = generatePassword(10);
       }
 
-      onSubmit({ name: nameValue, username: finalUsername, password: finalPassword})
+      onSubmit({ name: nameValue, username: finalUsername, password: finalPassword, matched: "Refresh Page"})
       .then((err) => {
         if(err === null)
         {
