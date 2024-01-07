@@ -1,4 +1,4 @@
-async function SignMeUp({username, password, acc_type, email, name, setError})
+async function SignMeUp({username, password, acc_type, email, name, setToken, setError})
 {
     return await fetch("/manager_create", {
     method: "POST",
@@ -18,7 +18,10 @@ async function SignMeUp({username, password, acc_type, email, name, setError})
         const jsonResponse = await response.json()
 
         if(!response.ok){
-            console.log("Error");
+            setError(jsonResponse.msg)
+        }
+        else {
+            LogMeIn({username, password, setToken, type: acc_type, setError})
         }
     })
 }
