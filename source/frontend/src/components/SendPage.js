@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 const SendPage = () => {
     const {access_token: [token, removeToken, ]} = useContext(UserContext)
     const [content, setContent] = useState("")
+    const [message, setMessage] = useState(null)
+    const [error, setError] = useState(null)
 
     function onLogOut()
     {
@@ -15,8 +17,18 @@ const SendPage = () => {
 
     function onSend()
     {
-        SendLetter({token, content})
-        setContent("")
+        SendLetter({token, content}).then((msg) => {
+            if(msg === null) {
+                setContent("")
+                setError(null)
+                setMessage("You successfully sent your letter")
+            }
+            else {
+                setError(msg)
+                setMessage(null)
+            }
+        })
+        
     }
 
     return (
@@ -30,6 +42,10 @@ const SendPage = () => {
                 </div>
                 <div class = 'sendbutton'>
                     <button class = 'inboxbbutton' onClick={onSend}>Send</button>
+                </div>
+                <div>
+                    {message === null ? null : <p>{message}</p>}
+                    {error === null ? null : <p>{error}</p>}
                 </div>
             </div>
         </div>

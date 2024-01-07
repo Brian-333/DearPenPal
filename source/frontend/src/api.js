@@ -167,7 +167,7 @@ function AddSubAcct({token, username, password, name})
 
 function SendLetter({token, content})
 {
-    fetch('/send_letter', {
+    return fetch('/send_letter', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -179,7 +179,10 @@ function SendLetter({token, content})
     }).then(async (response) => {
         const jsonResponse = await response.json()
         if(!response.ok) {
-            console.log(jsonResponse.msg)
+            return jsonResponse.msg
+        }
+        else {
+            return null
         }
     })
 }
