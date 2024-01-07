@@ -49,8 +49,6 @@ def match_sub_accts(username, user_type):
     except Exception as e:
         raise e
 
-print(hash_password("1"))
-
 @app.route('/manager_create', methods=['POST'])
 def manager_create():
     conn = DBConn()
@@ -86,7 +84,6 @@ def manager_create():
         conn.commit()
         return jsonify({'msg': 'Success'}), 200
     except Exception as e:
-        print(e)
         return jsonify({"msg": str(e)}), 500
 
 @app.route('/manager_login', methods=['POST', 'GET'])
@@ -126,7 +123,6 @@ def logout():
 @jwt_required()
 def get_acc_type():
     (username, type_) = get_jwt_identity()
-    print(type_)
     return jsonify({'type': type_}), 200
 
 @app.route('/add_sub_acct', methods=['POST'])
@@ -248,7 +244,6 @@ def get_sub_accts():
             return {'msg': 'No sub account found'}, 404
         
     except Exception as e:
-        print(e)
         return {'msg': str(e)}, 500
 
 @app.route('/get_letters', methods=['GET'])
@@ -258,7 +253,6 @@ def get_letters():
     
     (user, type_) = get_jwt_identity()
     try:
-        print('ASDASDA')
         conn.cursor.execute(
             'SELECT id, content, s1.name as owner_name, s2.name as receiver_name, sent_at FROM letters, sub_acct s1, sub_acct s2 WHERE owner = %s AND owner = s1.username AND receiver = s2.username',
             (user, )
@@ -273,7 +267,6 @@ def get_letters():
         received = list(map(lambda x: {"id": x[0], "text": x[1], "owner_name": x[2], "receiver_name": x[3], "date": x[4]}, received))
         return {'sent': sent, 'received': received}, 200
     except Exception as e:
-        print(e)
         return {'msg': str(e)}, 500
 
 @app.route('/send_letter', methods=['POST'])
