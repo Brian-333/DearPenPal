@@ -11,7 +11,7 @@ const ManagerPage = () => {
 
   useEffect(() => {
     FetchSubAccts({token, setSubAccts: setStudents, setDisplayedSubAccts: setDisplayedStudents});
-  }, [])
+  }, [token])
 
   const addStudent = (student) => {
     return AddSubAcct({token: token, username: student.username, password: student.password, name: student.name, setError})
