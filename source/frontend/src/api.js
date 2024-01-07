@@ -48,6 +48,7 @@ function LogMeIn({username, password, setToken, type, setUsertype, setError})
             // throw new Error(jsonResponse.msg)
         }
         else {
+            console.log(type)
             setUsertype(type)
             setError(null)
             setToken(jsonResponse.access_token)

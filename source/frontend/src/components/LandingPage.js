@@ -3,24 +3,21 @@ import { ManagerLogin } from "./ManagerLogin";
 import { PersonLogin } from "./PersonLogin";
 import { ManagerSignup } from "./ManagerSignup";
 import { UserContext } from "./UserContext";
-import SendPage from "./SendPage";
-import InboxPage from "./InboxPage"
 import  { Navigate } from 'react-router-dom';
-import managerPage from "./ManagerPage"
 import '../styles/landing.css'
-import ManagerPage from "./ManagerPage";
 
 const LandingPage = () =>{
-    return (<ManagerPage></ManagerPage>);
     const [currForm, setCurrForm] = useState("None");
     const {access_token: [token,,],
             user: [,,usertype,]} = useContext(UserContext)
 
     const renderForm = () => {
-        console.log("DEBUGGING - CurrForm:" + currForm)
-        console.log(token, (token === null))
         if(!(token === "" || token == null || token == undefined)){
             return usertype === 'm' ? <Navigate to='/Manager' /> : <Navigate to='/Send' />
+        }
+
+        if(window.location.href.substring(window.location.href.lastIndexOf('/')) === '/Send' || window.location.href.substring(window.location.href.lastIndexOf('/')) === '/Manager'){
+            window.location.href = '/'
         }
         if(currForm === "None"){
             return (<div class='landingbg'>
