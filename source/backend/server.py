@@ -288,18 +288,18 @@ def send_letter():
             'SELECT matched FROM sub_acct WHERE username = %s',
             (owner,)
         )
-        receiver = conn.cursor.fetchone()
-        if not receiver:
+        receiver = conn.cursor.fetchone()[0]
+        if receiver is None:
             return {'msg': 'You do not have a match yet.'}, 403
         
         conn.cursor.execute(
             'SELECT MAX(id) FROM letters'
         )
-        max_id = conn.cursor.fetchone()
-        if not max_id:
+        max_id = conn.cursor.fetchone()[0]
+        if max_id is None:
             max_id = 0
         else:
-            max_id = max_id[0] + 1
+            max_id = max_id + 1
         
         receiver = receiver[0]
         conn.cursor.execute(
