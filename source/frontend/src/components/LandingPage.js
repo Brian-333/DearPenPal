@@ -17,7 +17,7 @@ const LandingPage = () =>{
         console.log("DEBUGGING - CurrForm:" + currForm)
         console.log(token, (token === null))
         if(!(token === "" || token == null || token == undefined)){
-            return usertype == 'm' ? <Navigate to='/Manager' /> : <Navigate to='/Send' />
+            return usertype === 'm' ? <Navigate to='/Manager' /> : <Navigate to='/Send' />
         }
         if(currForm === "None"){
             return (<div class='landingbg'>
