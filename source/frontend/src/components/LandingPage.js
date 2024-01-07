@@ -1,21 +1,24 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ManagerLogin } from "./ManagerLogin";
 import { PersonLogin } from "./PersonLogin";
 import { ManagerSignup } from "./ManagerSignup";
 import { UserContext } from "./UserContext";
 import  { Navigate } from 'react-router-dom';
 import '../styles/landing.css'
+import { GetAccType } from "../api";
 
 const LandingPage = () =>{
     const [currForm, setCurrForm] = useState("None");
     const {access_token: [token,,],
-            user: [,,usertype,]} = useContext(UserContext)
+            user: [,,usertype, setUsertype]} = useContext(UserContext)
+    
+    useEffect(() => {
+        if(!(token === "" || token == null || token == undefined)){
+            GetAccType({token, setUsertype})
+        }
+    }, [])
 
     const renderForm = () => {
-        if(!(token === "" || token == null || token == undefined)){
-            return usertype === 'm' ? <Navigate to='/Manager' /> : <Navigate to='/Send' />
-        }
-
         if(window.location.href.substring(window.location.href.lastIndexOf('/')) === '/Send' || window.location.href.substring(window.location.href.lastIndexOf('/')) === '/Manager'){
             window.location.href = '/'
         }
@@ -49,7 +52,10 @@ const LandingPage = () =>{
 
     return(
         <>
-            {renderForm()}
+            {(!(token === "" || token == null || token == undefined) && usertype === 'm') ?
+                <Navigate to='/Manager' /> :
+                ((!(token === "" || token == null || token == undefined) && usertype === 'p') ? 
+                <Navigate to='/Send'/> : renderForm())}
         </>
     )
 }
