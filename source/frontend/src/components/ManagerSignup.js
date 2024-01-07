@@ -10,7 +10,8 @@ const ManagerSignup = ({setCurrForm}) => {
 
     async function onSubmit()
     {
-        await SignMeUp({username, password, email, name: fullName});
+        const acc_type = await document.getElementById('choose').value;
+        await SignMeUp({username, password, acc_type, email, name: fullName});
     }
 
     return(
