@@ -14,18 +14,21 @@ const ManagerLogin = ({setCurrForm}) => {
     }
 
     return (
-        <div>
-            <div>
-                <button type="button" onClick={() => setCurrForm("None")}>Back</button>
+        <div class = 'loginbg'>
+            <div class = 'backbuttonpad'>
+                <button type="button" class='buttoncolour' onClick={() => setCurrForm("None")}>Back</button>
             </div>
-            <div>
+            <div class= 'title'>
+                <label>Manager Login</label><br></br>
+            </div>
             <div>
                 <label for = "username">Username:</label><br></br>
-                <input type = "text" id = "username" name = "username" value={username} onChange={(e) => setUsername(e.target.value)}></input><br></br>
+                <input class ='inputboxsize' type = "text" id = "username" name = "username" value={username} onChange={(e) => setUsername(e.target.value)}></input><br></br>
                 <label for = "password">Password:</label><br></br>
-                <input type = "text" id = "password" name = "password" value={password} onChange={(e) => setPassword(e.target.value)}></input><br></br>
-                <button type = "submit" onClick={onSubmit}>Submit</button>
+                <input class ='inputboxsize' type = "text" id = "password" name = "password" value={password} onChange={(e) => setPassword(e.target.value)}></input><br></br>
             </div>
+            <div class = 'submitbuttonpad'>
+                <button class = 'buttoncolour' type = "submit" onClick={onSubmit}>Submit</button>
             </div>
         </div>
     )

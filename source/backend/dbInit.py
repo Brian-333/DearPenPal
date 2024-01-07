@@ -1,11 +1,24 @@
 from classes.dbConn import DBConn
+import sys
 
 def main():
     db = DBConn()
+
+    # add command line argument 'd' to drop tables
+    # !!! WARNING: THIS WILL DELETE ALL DATA IN THE DATABASE !!!
+    if len(sys.argv) > 1:
+        if sys.argv[1] == 'd':
+            db.cursor.execute(
+                'DROP TABLE IF EXISTS managers, sub_acct, letters'
+            )
+            db.connection.commit()
+            print('Tables dropped')
+
     db.cursor.execute(
         '''CREATE TABLE IF NOT EXISTS managers (
             username varchar(255) PRIMARY KEY,
             password varchar(255) NOT NULL,
+            type varchar(255) NOT NULL,
             email varchar(255),
             name varchar(255)
         );
@@ -33,6 +46,7 @@ def main():
         );
         ''')
     db.connection.commit()
+    print('Tables created')
 
 if __name__ == '__main__':
     main()

@@ -1,0 +1,51 @@
+.landingbg{
+    background-color: #faf3dd;
+    padding-bottom: 10%;
+}
+
+.placetitle{
+    justify-content: center;
+    text-align: center;
+    padding-top: 10%;
+    padding-bottom: 8%;
+    background-color: #68b0ab;
+}
+
+.landingtitle{
+    font-size: 70pt;
+    text-align: center;
+
+}
+
+.loginbutton{
+    background-color: #68b0abdd;
+    font-size: 45pt;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.placelogin{
+    justify-content: center;
+    text-align: center;
+    padding-top: 7%;
+}
+
+.placemanagerbtns{
+    padding-top: 10%;
+    justify-content:center;
+    text-align: center;
+}
+
+.managerbtnleft{
+    background-color: #a8c3c0;
+    font-size: 25pt;
+    margin-right: 2%
+}
+
+.managerbtnright{
+    background-color: #a8c3c0;
+    font-size: 25pt;
+    margin-left: 2%
+}

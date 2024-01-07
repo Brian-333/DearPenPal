@@ -1,0 +1,46 @@
+.inletter{
+    overflow: scroll;
+    width: 40%;
+    height: 550pt;
+    table-layout: fixed;
+    border-collapse: collapse;
+    float:left;
+}
+
+.tabletop{
+    overflow: scroll;
+    width: 40%;
+
+}
+
+.letterviewer{
+    justify-content: center;
+    background-color: #faf3dd;
+    float: left;
+    width: 550pt;
+    height: 550pt;
+    padding-left: 20pt;
+}
+
+.letterviewertext{
+    justify-content: center;
+    width: 500pt;
+    overflow-wrap: break-word 
+}
+
+.inboxbg{
+    background-color: #c8d5b9;
+    padding-bottom: 50pt
+}
+
+.sidebyside{
+    overflow: hidden
+}
+
+.inboxbbutton{
+    margin-left: 1%;
+    margin-top:1%;
+    background-color: #faf3dd;
+    margin-bottom: 1%;
+    font-size: 15pt;
+}

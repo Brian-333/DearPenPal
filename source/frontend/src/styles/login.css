@@ -1,8 +1,47 @@
-body {
-    background-color:#faf3dd;
+.loginbg {
+    background-color:#c8d5b9;
+    padding-bottom: 19%;
+    
 }
-/*
-.form-submit-button{
-    color: #faf3dd;
+.buttoncolour{
+    background-color: #8fc0a9;
+    font-size: 20pt;
 }
-*/
+
+.inputtext{
+    text-align: center;
+    justify-content: center;
+    padding-top: 10%;
+    font-size: 20pt;
+
+}
+
+.inputboxsize{
+    width: 200pt;
+    height: 20pt;
+    font-size: 20 pt;
+}
+
+.backbuttonpad{
+    padding-left: 1%;
+    padding-top: 1%;
+}
+
+.submitbuttonpad{
+    justify-content: center;
+    text-align: center;
+    padding-top: 5%;
+}
+
+.title{
+    font-size: 40pt;
+    justify-content: center;
+    text-align: center;
+    padding-top: 5%;
+}
+
+.signupsubmit{
+    background-color: #8fc0a9;
+    font-size: 20pt;
+    margin-top: 5%;
+}

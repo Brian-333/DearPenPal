@@ -1,4 +1,4 @@
-async function SignMeUp({username, password, email, name})
+async function SignMeUp({username, password, acc_type, email, name})
 {
     return await fetch("/manager_create", {
     method: "POST",
@@ -9,6 +9,7 @@ async function SignMeUp({username, password, email, name})
     body: JSON.stringify({
         "username": username,
         "password": password,
+        "type": acc_type,
         "email": email,
         "name": name
     })
