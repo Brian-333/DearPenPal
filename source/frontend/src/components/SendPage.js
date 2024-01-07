@@ -1,21 +1,25 @@
 import '../styles/Inbox.css'
 
 const SendPage = () => {
-    return(
+    return (
         <div class = 'inboxbg'>
             <button class = 'inboxbbutton'>Back</button>
+            <label class = 'waywtlabel'>Who are you writing to: </label>
+            <select class = 'selectperson'>
+                <option value = 'Kid1'>kid 1</option>
+                <option value = 'kid2'>kid 2</option>
+            </select>
             <div class = 'sidebyside'>
-                <div class = "inletter">
+                <div>
+                    <textarea rows = '80' cols = '5' class = 'sendletter'></textarea>
                 </div>
-                <div class = 'letterviewer'>
-                    <textarea rows = '80' cols ='50' class = 'sendletter'></textarea> 
+                <div class = 'sendbutton'>
+                    <button class = 'inboxbbutton'>Send</button>
                 </div>
-                <div class = 'Send Button'>
-                <button class = 'inboxbbutton'>Send</button>
-            </div>
             </div>
         </div>
     );
 } 
 
 export default SendPage
+
