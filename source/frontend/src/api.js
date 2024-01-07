@@ -25,7 +25,7 @@ async function SignMeUp({username, password, acc_type, email, name})
 
 function LogMeIn({username, password, setToken, type})
 {
-    const url = type === "m" ? "/manager_login" : "/person_login"
+    const url = type === "m" ? "/manager_login" : "/sub_acct_login"
     console.log(url)
     fetch(url, {
         method: "POST",
@@ -49,4 +49,21 @@ function LogMeIn({username, password, setToken, type})
     })
 }
 
-export {SignMeUp, LogMeIn};
+function LogMeOut({token, removeToken})
+{
+    fetch("/logout", {
+        method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    }).then((response) => {
+        if(response.ok) {
+            removeToken()
+        }
+        else{
+            console.log("Error in logout")
+        }
+    })
+}
+
+export {SignMeUp, LogMeIn, LogMeOut};

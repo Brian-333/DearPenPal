@@ -1,5 +1,18 @@
+import { useContext, useState } from 'react'
 import '../styles/login.css'
+import { LogMeIn } from '../api'
+import { UserContext } from './UserContext'
+
 const PersonLogin = ({setCurrForm}) => {
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const {access_token:[,,setToken]} = useContext(UserContext)
+
+    function onSubmit()
+    {
+        LogMeIn({username, password, setToken, type:"p"})
+    }
+
     return (
         <div class = 'loginbg'>
             <div class = 'backbuttonpad'>
@@ -12,13 +25,13 @@ const PersonLogin = ({setCurrForm}) => {
 
             <div class="inputtext">
             <div>
-                <label for = "username">Username:</label><br></br>
-                <input type = "text" class = 'inputboxsize' id = "username" name = "Username"></input><br></br>
-                <label for = "password">Password:</label><br></br>
-                <input type = "password" class = 'inputboxsize' id = "password" name = "password"></input><br></br>
+                <label>Username:</label><br></br>
+                <input type = "text" class = 'inputboxsize' id = "username" name = "Username" value={username} onChange={(e) => setUsername(e.target.value)}></input><br></br>
+                <label>Password:</label><br></br>
+                <input type = "password" class = 'inputboxsize' id = "password" name = "password" value={password} onChange={(e) => setPassword(e.target.value)}></input><br></br>
             </div>
             <div class = 'submitbuttonpad'>
-                <button class = 'buttoncolour' type = "submit"></button>
+                <button class = 'buttoncolour' type = "submit" onClick={onSubmit}></button>
             </div>
             </div>
         </div>
