@@ -142,7 +142,7 @@ const InputRow = ({onSubmit}) => {
   );
 }
 
-const StudentModal = ({show, onClose, Senior}) => {
+const StudentModal = ({show, onClose}) => {
   if (!show) {
     return null;
   }
@@ -151,7 +151,6 @@ const StudentModal = ({show, onClose, Senior}) => {
     <>
       <div className="modal-backdrop" onClick={onClose}/>
       <div className="modal-content">
-        <p>Pair: {Senior}</p>
         <label>Change Name</label>
         <div className='.form-element'>
           <input placeholder='Type new name...'></input>
