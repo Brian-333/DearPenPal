@@ -43,11 +43,21 @@ const AddStudentModal = ({isOpen, close, onSubmit}) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (name.trim() === "" || username.trim() === "" || password.trim() === "") {
+    let finalUsername = username;
+    let finalPassword = password;
+  
+    if (name.trim() === "") {
+      alert("Name field cannot be empty")
       return;
     }
-
-    onSubmit({name, username, password});
+    if (username.trim() === "") {
+      finalUsername = generateRandomUsername();
+    }
+    if (password.trim() === "") {
+      finalPassword = generatePassword(10);
+    }
+  
+    onSubmit({name: name, username: finalUsername, password: finalPassword});
     setName("");
     setUsername("");
     setPassword("");
@@ -63,7 +73,7 @@ const AddStudentModal = ({isOpen, close, onSubmit}) => {
       <div className="modal-content">
         <form onSubmit={handleSubmit}>
           <div class="form-element">
-            <label>Name: </label>
+            <label onClick>Name: </label>
             <input type="text" name="name" placeholder={'Mandatory'} onChange={e => setName(e.target.value)} />
           </div>
           <div class="form-element">
@@ -79,6 +89,26 @@ const AddStudentModal = ({isOpen, close, onSubmit}) => {
       </div>
     </>
   );
+}
+
+function generateRandomUsername() {
+  const adjectives = ['Quick', 'Lazy', 'Happy', 'Sad', 'Sleepy', 'Noisy', 'Hungry'];
+  const nouns = ['Bear', 'Fox', 'Panda', 'Rabbit', 'Turtle', 'Raccoon', 'Lion'];
+  
+  const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+  const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+  const randomNumber = Math.floor(Math.random() * 100) + 1;
+  
+  return randomAdjective + randomNoun + randomNumber;
+}
+
+function generatePassword(length) {
+  var charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var password = "";
+  for (var i = 0, n = charset.length; i < length; ++i) {
+    password += charset.charAt(Math.floor(Math.random() * n));
+  }
+  return password;
 }
 
 const AddStudentButton = (props) => {
