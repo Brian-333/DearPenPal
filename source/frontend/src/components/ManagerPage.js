@@ -185,9 +185,6 @@ const StudentModal = ({show, onClose, onSubmit}) => {
 
         <label>Change Password</label>
         <div className='.form-element'>
-          <input placeholder='Old password...'></input>
-        </div>
-        <div className='.form-element'>
           <input placeholder='New password...'></input>
         </div>
         <div className='.form-element'>
