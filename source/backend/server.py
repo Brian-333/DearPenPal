@@ -201,6 +201,7 @@ def sub_acct_login():
 def sub_acct_update():
     conn = DBConn()
 
+    (manager, type_) = get_jwt_identity()
     username = request.json['username']
     password = request.json['password']
     name = request.json['name']
@@ -235,11 +236,11 @@ def get_sub_accts():
 
     try:
         conn.cursor.execute(
-            'SELECT username, name FROM sub_acct WHERE manager = %s',
+            'SELECT username, name, matched FROM sub_acct WHERE manager = %s',
             (manager,)
         )
         result = conn.cursor.fetchall()
-        result = list(map(lambda x: {'username': x[0], 'name': x[1], 'password': '(hidden)'}, result))
+        result = list(map(lambda x: {'username': x[0], 'name': x[1], 'password': '(hidden)', 'matched': (x[2] is not None)}, result))
         if result:
             # ! Results are in tuple format
             return {'msg': result}, 200
