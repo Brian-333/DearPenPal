@@ -3,6 +3,8 @@ import { ManagerLogin } from "./ManagerLogin";
 import { PersonLogin } from "./PersonLogin";
 import { ManagerSignup } from "./ManagerSignup";
 import { UserContext } from "./UserContext";
+import SendPage from "./SendPage";
+import InboxPage from "./InboxPage"
 import  { Navigate } from 'react-router-dom';
 import '../styles/landing.css'
 
@@ -12,7 +14,6 @@ const LandingPage = () =>{
 
     const renderForm = () => {
         console.log("DEBUGGING - CurrForm:" + currForm)
-        
         console.log(token, (token === null))
         if(!(token === "" || token === null)){
             return <Navigate to='/Manager' />

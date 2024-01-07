@@ -18,7 +18,7 @@ const PersonLogin = ({setCurrForm}) => {
                 <input type = "password" class = 'inputboxsize' id = "password" name = "password"></input><br></br>
             </div>
             <div class = 'submitbuttonpad'>
-                <button class = 'buttoncolour' type = "submit"></button>
+                <button class = 'buttoncolour' type = "submit">Submit</button>
             </div>
             </div>
         </div>

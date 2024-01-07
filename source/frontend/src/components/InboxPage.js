@@ -14,16 +14,8 @@ const InboxPage = () => {
             <div class = 'sidebyside'>
                 <div class = "inletter">
                 <table>
-                    <Letter name = "John" date = '2024-01-06'></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
-                    <Letter name = "John" date = '2024-01-06' ></Letter>
+                    <ReceivedLetter name = "John" date = '2024-01-06'></ReceivedLetter>
+                    <SentLetter name = 'Rolanda' date = '2024-01-05'></SentLetter>
                 </table>
                 </div>
                 <div class = 'letterviewer'>
@@ -34,7 +26,7 @@ const InboxPage = () => {
     );
 }
 
-const Letter = (props) => {
+const ReceivedLetter = (props) => {
     return (
         <tr>
             <td>from: {props.name}</td>
@@ -43,4 +35,15 @@ const Letter = (props) => {
         </tr>
     );
 }
+
+const SentLetter = (props) => {
+    return (
+        <tr>
+            <td>To: {props.name}</td>
+            <td>{props.date}</td>
+            <td><button id = {props.name}>Open</button></td>
+        </tr>
+    );
+}
+
 export default InboxPage
