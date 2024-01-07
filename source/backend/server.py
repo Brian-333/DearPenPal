@@ -2,6 +2,7 @@ from flask import Flask, request
 from classes.dbConn import DBConn
 import hashlib
 SALT = 'home_and_school'
+MNG_TYPES = {'Retirement Community Manager': 'senior', 'Teacher': 'student'}
 
 app = Flask(__name__)
 
@@ -17,7 +18,16 @@ def manager_create():
     password = request.json['password']
     email = request.json['email']
     name = request.json['name']
+    manager_type = request.json['type']
     password = hash_password(password)
+
+    # Validate inputs
+    if not manager_type in MNG_TYPES.keys():
+        return 'Invalid manager type', 400
+    if not username or not password:
+        return 'Missing fields', 400
+    
+    manager_type = MNG_TYPES[manager_type]
 
     try:
         # Check if username already exists
@@ -31,8 +41,8 @@ def manager_create():
         
         # Register new manager
         conn.cursor.execute(
-            'INSERT INTO managers (username, password, email, name) VALUES (%s, %s, %s, %s)',
-            (username, password, email, name)
+            'INSERT INTO managers (username, password, type, email, name) VALUES (%s, %s, %s, %s, %s)',
+            (username, password, manager_type, email, name)
         )
         conn.commit()
         return 'Success', 200
@@ -47,6 +57,10 @@ def manager_login():
     username = request.json['username']
     password = request.json['password']
     password = hash_password(password)
+
+    # Validate inputs
+    if not username or not password:
+        return 'Missing fields', 400
 
     try:
         conn.cursor.execute(
@@ -71,6 +85,10 @@ def add_sub_acct():
     name = request.json['name']
     usr_type = request.json['usr_type']
     manager = request.json['manager']
+
+    # Validate inputs
+    if usr_type not in MNG_TYPES:
+        return 'Invalid user type', 400
 
     try:
         # Check if username already exists
