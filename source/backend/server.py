@@ -267,6 +267,7 @@ def get_letters():
 def send_letter():
     conn = DBConn()
 
+    print(request.json['content'])
 
 
 # Running app

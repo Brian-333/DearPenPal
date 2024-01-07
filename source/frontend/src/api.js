@@ -138,7 +138,7 @@ function FetchSubAccts({token, setSubAccts, setDisplayedSubAccts})
     })
 }
 
-function AddSubAcct({token, username, password, name, setError})
+function AddSubAcct({token, username, password, name})
 {
     return fetch("/add_sub_acct", {
         method: "POST",
@@ -165,4 +165,23 @@ function AddSubAcct({token, username, password, name, setError})
     })
 }
 
-export {SignMeUp, LogMeIn, LogMeOut, GetAccType, FetchLetters, FetchSubAccts, AddSubAcct};
+function SendLetter({token, content})
+{
+    fetch('/send_letter', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            'content': content
+        })
+    }).then(async (response) => {
+        const jsonResponse = await response.json()
+        if(!response.ok) {
+            console.log(jsonResponse.msg)
+        }
+    })
+}
+
+export {SignMeUp, LogMeIn, LogMeOut, GetAccType, FetchLetters, FetchSubAccts, AddSubAcct, SendLetter};
