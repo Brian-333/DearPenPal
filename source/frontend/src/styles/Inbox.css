@@ -67,7 +67,14 @@
     background-color: #faf3dd;
 }
 
-.waywtlabel{
-    margin-left: 56%;
+.logoutbutton{
+    margin-left: 59%;
     font-size: 20pt;
+    background-color: #faf3dd;
+}
+
+.readlettersbutton{
+    margin-left: 2%;
+    font-size: 20pt;
+    background-color: #faf3dd;
 }
