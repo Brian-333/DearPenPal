@@ -1,13 +1,19 @@
+:root {
+    --blue: #7BB2D9;
+    --hover-blue: #56a3da;
+    --white: #eaeaea;
+}
+
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #B9C9A6; /*#4CAF50;*/
+    background-color: var(--blue); /*#4CAF50;*/
     padding: 10px;
 }
   
 nav button {
-    background-color: #faf3dd;
+    background-color: var(--white);
     border: none;
     padding: 10px;
     margin-right: 10px;
@@ -40,37 +46,8 @@ td, th {
 }
 
 .student-table {
-    background-color: #faf3dd;/*rgb(214, 214, 214);*/
+    background-color: var(--white);/*rgb(214, 214, 214);*/
     padding-top: 50px;
-}
-  
-.addStudentContainer {
-    text-align: center;
-    margin: 2rem;
-}
-
-.addStudentContainer button {
-    background-color: #4CAF50; /* Green */
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-}
-
-.addStudentContainer button:hover {
-    background-color: #f2f2f2;
-    color: #4CAF50;
-}
-
-.addStudentContainer button:active {
-    background-color:#faf3dd /* #d9d9d9; */
 }
 
 .modal-backdrop {
@@ -89,7 +66,7 @@ td, th {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #faf3dd; /*white*/
+    background-color: var(--white); /*white*/
     padding: 1em;
     z-index: 1001;
 }
@@ -97,10 +74,16 @@ td, th {
 .form-element {
     display: block;
     padding: 10px;
+    text-align: center;
 }
 
 .form-element input {
     width: 30ch;
+}
+
+.delete-container {
+    text-align: center;
+    margin: auto;
 }
 
 .delete-button {
@@ -108,12 +91,13 @@ td, th {
     border: none;
     border-radius: 20px;
     padding: 10px;
+    width: 50%;
 }
 
 .delete-button:hover {
     outline: none;
     cursor: pointer;
-    background: rgb(255, 72, 72)55, 109, 109);
+    background: rgb(255, 72, 72);
 }
 
 .cursor-pointer {
@@ -124,8 +108,21 @@ td, th {
     border: 0.7px solid black;
 }
 
+.form-element .submit-button {
+    background: #c7c7c7;
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    width: 50%;
+}
+
+.form-element .submit-button:hover {
+    cursor: pointer;
+    background: #aaaaaa;
+}
+
 .MyInput {
-    background-color:#faf3dd;  /*rgb(214, 214, 214);*/
+    background-color:var(--white);  /*rgb(214, 214, 214);*/
     border: none;
     font-size: 1em;
     padding: none;
@@ -140,6 +137,10 @@ td, th {
     width: 100px;
 }
 
+.accountbtn:hover {
+    cursor: pointer;
+}
+
 .dropdown {
     display: none;
     position: absolute;
@@ -149,6 +150,7 @@ td, th {
 .account-container:hover .dropdown {
     display: block;
 }
+
 .dropdown button {
     display: block;
     color: #000000;
@@ -158,11 +160,12 @@ td, th {
 }
 .dropdown button:hover {
     color: #FFFFFF;
-    background-color: #B9C9A6;
+    background-color: var(--hover-blue);
+    cursor: pointer;
 }
 
 .bgcolour{
-    background-color: #faf3dd;
+    background-color: var(--white);
     padding-bottom: 20%;
 }
 

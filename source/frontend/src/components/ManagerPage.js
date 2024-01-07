@@ -150,26 +150,9 @@ const InputRow = ({onSubmit}) => {
 }
 
 const StudentModal = ({show, onClose, onSubmit}) => {
-  // const [newName, setNewName] = useState("");
   if (!show) {
     return null;
   }
-
-  // const changeName = (newName) => {
-  
-  //   if (newName.trim() === "") {
-  //     return;
-  //   }
-
-  //   onSubmit({name: newName})
-  //   .then((err) => {
-  //     if(err === null)
-  //     {
-  //       alert("name was not changed");
-  //     }
-  //   });
-  // }
-  
 
   return (
     <>
@@ -189,12 +172,12 @@ const StudentModal = ({show, onClose, onSubmit}) => {
             <input placeholder='Confirm new password...'></input>
           </div>
           <div className='form-element'>
-            <button>Submit</button>
+            <input className='submit-button' type='submit' value='Submit'/>
           </div>
           <div>
 
           </div>
-          <div className='form-element'>
+          <div className='delete-container'>
             <button className='delete-button'>Delete Account</button>
           </div>
         </form>

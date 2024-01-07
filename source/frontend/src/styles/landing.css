@@ -1,5 +1,11 @@
+:root {
+    --blue: #7BB2D9;
+    --hover-blue: #56a3da;
+    --white: #eaeaea;
+}
+
 .landingbg{
-    background-color: #faf3dd;
+    background-color: var(--white);
     padding-bottom: 10%;
 }
 
@@ -8,22 +14,28 @@
     text-align: center;
     padding-top: 10%;
     padding-bottom: 8%;
-    background-color: #B9C9A6;/*#68b0ab;*/
+    background-color: var(--blue);/*#68b0ab;*/
 }
 
 .landingtitle{
     font-size: 70pt;
     text-align: center;
-
 }
 
 .loginbutton{
-    background-color: #B9C9A6;/*#68b0abdd;*/
+    background-color: var(--blue);/*#68b0abdd;*/
     font-size: 45pt;
     padding-top: 1%;
     padding-bottom: 1%;
     padding-left: 5%;
     padding-right: 5%;
+    border: none;
+    border-radius: 20px;
+}
+
+.loginbutton:hover {
+    cursor: pointer;
+    background-color: var(--hover-blue);
 }
 
 .placelogin{
@@ -39,13 +51,36 @@
 }
 
 .managerbtnleft{
-    background-color:#B9C9A6;/*#a8c3c0;*/
+    background-color: var(--blue);/*#a8c3c0;*/
     font-size: 25pt;
-    margin-right: 2%
+    margin: 10px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 3%;
+    padding-right: 3%;
+    border: none;
+    border-radius: 20px;
 }
 
+.managerbtnleft:hover {
+    cursor: pointer;
+    background-color: var(--hover-blue);
+}
+
+ 
 .managerbtnright{
-    background-color: #B9C9A6; /*#a8c3c0;*/
+    background-color: var(--blue); /*#a8c3c0;*/
     font-size: 25pt;
-    margin-left: 2%
+    margin: 10px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 3%;
+    padding-right: 3%;
+    border: none;
+    border-radius: 20px;
+}
+
+.managerbtnright:hover {
+    cursor: pointer;
+    background-color: var(--hover-blue);
 }

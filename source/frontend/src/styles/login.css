@@ -1,5 +1,10 @@
+:root {
+    --blue: #7BB2D9;
+    --white: #eaeaea;
+}
+
 .loginbg {
-    background-color:#B9C9A6;
+    background-color: var(--white);
     padding-bottom: 19%;
     
 }
