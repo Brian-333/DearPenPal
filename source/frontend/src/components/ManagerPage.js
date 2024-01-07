@@ -93,7 +93,7 @@ const InputRow = ({onSubmit}) => {
         finalPassword = generatePassword(10);
       }
 
-      onSubmit({ name: nameValue, username: finalUsername, password: finalPassword, matched: "Refresh page" })
+      onSubmit({ name: nameValue, username: finalUsername, password: finalPassword})
       .then((err) => {
         if(err === null)
         {
@@ -149,10 +149,27 @@ const InputRow = ({onSubmit}) => {
   );
 }
 
-const StudentModal = ({show, onClose}) => {
+const StudentModal = ({show, onClose, onSubmit}) => {
+  // const [newName, setNewName] = useState("");
   if (!show) {
     return null;
   }
+
+  // const changeName = (newName) => {
+  
+  //   if (newName.trim() === "") {
+  //     return;
+  //   }
+
+  //   onSubmit({name: newName})
+  //   .then((err) => {
+  //     if(err === null)
+  //     {
+  //       alert("name was not changed");
+  //     }
+  //   });
+  // }
+  
 
   return (
     <>
