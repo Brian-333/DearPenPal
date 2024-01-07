@@ -10,15 +10,15 @@ const PersonLogin = ({setCurrForm}) => {
                 <label>Login</label><br></br>
             </div>
 
+            <div class="inputtext">
             <div>
-            <form class = 'inputtext'>
                 <label for = "username">Username:</label><br></br>
                 <input type = "text" class = 'inputboxsize' id = "username" name = "Username"></input><br></br>
                 <label for = "password">Password:</label><br></br>
                 <input type = "password" class = 'inputboxsize' id = "password" name = "password"></input><br></br>
-            </form>
+            </div>
             <div class = 'submitbuttonpad'>
-                <input class = 'buttoncolour' type = "submit"></input>
+                <button class = 'buttoncolour' type = "submit"></button>
             </div>
             </div>
         </div>
