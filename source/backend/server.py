@@ -87,6 +87,7 @@ def logout():
     unset_jwt_cookies(response)
     return response, 200
 
+@jwt_required()
 @app.route('/add_sub_acct', methods=['POST'])
 def add_sub_acct():
     conn = DBConn()
