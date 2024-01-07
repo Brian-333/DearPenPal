@@ -13,6 +13,7 @@ const LandingPage = () =>{
     const {access_token: [token,,]} = useContext(UserContext)
 
     const renderForm = () => {
+        return ( <SendPage></SendPage>);
         console.log("DEBUGGING - CurrForm:" + currForm)
         console.log(token, (token === null))
         if(!(token === "" || token === null)){
