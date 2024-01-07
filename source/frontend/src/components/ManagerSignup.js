@@ -28,7 +28,7 @@ const ManagerSignup = ({setCurrForm}) => {
             <label>Username:</label><br></br>
             <input type = "text" id = "username" name = "Username" value={username} onChange={(e) => setUsername(e.target.value)}></input><br></br>
             <label>Password:</label><br></br>
-            <input type = "text" id = "password" name = "password" value={password} onChange={(e) => setPassword(e.target.value)}></input><br></br>
+            <input type = "password" id = "password" name = "password" value={password} onChange={(e) => setPassword(e.target.value)}></input><br></br>
             <label>Full Name:</label><br></br>
             <input type = "text" id = "name" name = "name" value={fullName} onChange={(e) => setFullName(e.target.value)}></input><br></br>
             <label>Email:</label><br></br>

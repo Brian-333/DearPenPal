@@ -13,7 +13,7 @@ const ManagerLogin = ({setCurrForm}) => {
                 <label>Username:</label><br></br>
                 <input class ='inputboxsize' type = "text" id = "username" name = "Username"></input><br></br>
                 <label>Password:</label><br></br>
-                <input class ='inputboxsize' type = "text" id = "password" name = "password"></input><br></br>
+                <input class ='inputboxsize' type = "password" id = "password" name = "password"></input><br></br>
             </form>
             <div class = 'submitbuttonpad'>
                 <button class = 'buttoncolour' type = "submit">Submit</button>
